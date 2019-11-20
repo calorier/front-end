@@ -58,3 +58,14 @@
     border-radius: 12px;
 }
 
+.verify-code {
+    width: 550px;
+    height: 86px;
+    flex-direction: row;
+    margin: 12px 0 12px 0;
+    align-items: stretch;
+  }
+  
+  .verify-code > input {
+    flex: 1;
+  }

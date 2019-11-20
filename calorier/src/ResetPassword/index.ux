@@ -1,0 +1,44 @@
+<template>
+    <div class="page">
+        <input class="large-text-box line-text-box" type="password" placeholder="请输入新密码" value="{{password}}"></input>
+        <input class="large-text-box line-text-box" type="password" placeholder="请再次确认密码" value="{{pwd}}"></input>
+        <input id="reset" class="large-btn green-btn login-btn" type="button" value="保存并登录" onclick="reset" />
+    </div>
+</template>
+<style>
+@import "../Common/css/main.css";
+
+.page {
+  justify-content: flex-start;
+  margin-top: 75px;
+}
+
+.page > input {
+  font-size: 32px;
+}
+
+[type="password"] {
+  margin: 8px 0 8px 0;
+}
+
+#reset {
+  margin-top: 75px;
+}
+</style>
+<script>
+export default {
+    protected: {
+        email: ''
+    },
+    private: {
+        password: '',
+        pwd: ''
+    },
+    reset() {
+        //TODO:完成重置密码方法
+    },
+    onInit() {
+        this.$page.setTitleBar({ text: this.email })
+    },
+}
+</script>

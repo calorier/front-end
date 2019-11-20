@@ -32,6 +32,12 @@
       },
       "SignIn": {
         "component": "index"
+      },
+      "FindPassword": {
+        "component": "index"
+      },
+      "ResetPassword": {
+        "component": "index"
       }
     },
     "widgets": {}
@@ -46,6 +52,12 @@
       },
       "SignIn": {
         "titleBarText": "注册账号"
+      },
+      "FindPassword": {
+        "titleBarText": "找回密码"
+      },
+      "ResetPassword": {
+        "titleBarText": "重置密码"
       }
     }
   }

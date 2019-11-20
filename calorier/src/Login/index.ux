@@ -15,7 +15,7 @@
         <!-- 页脚组件 -->
         <div class="foot">
             <a href="/SignIn">注册账号</a>
-            <a id="forget-pwd" href="#">忘记密码</a>
+            <a id="forget-pwd" href="/FindPassword">忘记密码</a>
             <text>
                 <!-- 其他信息 --></text>
         </div>
