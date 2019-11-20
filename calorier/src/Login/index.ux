@@ -7,16 +7,17 @@
         <!-- 登录框集合组件 -->
         <div class="login-box">
             <div class="input-box">
-                <input class="common-text-box login-text" type="text" value="{{username}}" placeholder="请输入用户名/邮箱" />
-                <input class="common-text-box login-text" type="password" value="{{password}}" placeholder="请输入密码" />
+                <input class="large-text-box line-text-box login-text" type="text" value="{{username}}" placeholder="请输入用户名/邮箱" />
+                <input class="large-text-box line-text-box login-text" type="password" value="{{password}}" placeholder="请输入密码" />
             </div>
             <input class="large-btn green-btn login-btn" type="button" value="登录" onclick="login" />
         </div>
         <!-- 页脚组件 -->
         <div class="foot">
-            <a href="#">注册账号</a>
-            <a href="#">忘记密码</a>
-            <text></text>
+            <a href="/SignIn">注册账号</a>
+            <a id="forget-pwd" href="#">忘记密码</a>
+            <text>
+                <!-- 其他信息 --></text>
         </div>
     </div>
 </template>
@@ -39,19 +40,23 @@
   margin: 67px 0 36px 0;
 }
 
-.foot>a{
-    margin: 10px 10px 10px 10px;
+.foot > a {
+  margin: 10px 10px 10px 10px;
+}
+
+#forget-pwd {
+  color: #ff0000;
 }
 </style>
 <script>
 
-export default{
-    private:{
+export default {
+    private: {
         username: '',
         password: '',
         icon: '../Common/logo.png'
     },
-    login(){
+    login() {
         //TODO:补全登录代码
     },
 }

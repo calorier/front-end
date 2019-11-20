@@ -1,0 +1,53 @@
+<template>
+    <div class="page">
+        <input class="large-text-box line-text-box" type="text" placeholder="请输入用户名" value="{{username}}"></input>
+        <input class="large-text-box line-text-box" type="password" placeholder="请输入密码" value="{{password}}"></input>
+        <input class="large-text-box line-text-box" type="password" placeholder="请再次确认密码" value="{{pwd}}"></input>
+        <input class="large-text-box line-text-box" type="email" placeholder="请输入绑定邮箱" value='{{email}}'></input>
+        <div class="verify-code">
+            <input class="small-text-box line-text-box" type="text" placeholder="请输入邮箱验证码" value="{{verifyCode}}"></input>
+            <input class="small-btn orange-btn" type="button" value="{{verifyBtn}}"></input>
+        </div>
+        <input id="signIn" class="large-btn orange-btn login-btn" type="button" value="注册" onclick="signIn" />
+    </div>
+</template>
+<style>
+@import "../Common/css/main.css";
+
+.verify-code {
+  width: 550px;
+  height: 86px;
+  flex-direction: row;
+  margin: 12px 0 12px 0;
+  align-items: stretch;
+}
+.verify-code > input {
+  flex: 1;
+}
+
+input {
+  font-size: 32px;
+}
+
+#signIn {
+  margin: 75px 0 0 0;
+}
+.page > input {
+  margin: 8px 0 8px 0;
+}
+</style>
+<script>
+export default {
+    private: {
+        verifyBtn: '获取验证码',
+        username: '',
+        password: '',
+        pwd: '',
+        email: '',
+        verifyCode: ''
+    },
+    signIn() {
+        //TODO: 补全登录代码
+    }
+}
+</script>

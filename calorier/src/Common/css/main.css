@@ -11,17 +11,50 @@
     border-radius: 43px;
 }
 
+.small-btn{
+    width: 250px;
+    height: 86px;
+    border-radius: 43px;
+}
+
+.border-radius-max{
+    border-radius: 43px;
+}
+
+.border-radius-min{
+    border-radius: 12px;
+}
+
 .green-btn{
     background-color: #09ba07;
     color: white
 }
 
-.common-text-box{
-    border-bottom: 2px solid darkgray;
+.orange-btn{
+    background-color: orange;
+    color: white;
+}
+
+.large-text-box{
     width: 550px;
+}
+
+.small-text-box{
+    width: 250px;
+}
+
+.line-text-box{
+    border-bottom: 2px solid darkgray;
     height: 86px;
 }
 
 .center-text{
     text-align: center;
 }
+
+.border-text-box{
+    border: 2px solid darkgray;
+    height: 86px;
+    border-radius: 12px;
+}
+

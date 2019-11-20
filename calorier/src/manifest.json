@@ -29,11 +29,12 @@
     "pages": {
       "Login": {
         "component": "index"
+      },
+      "SignIn": {
+        "component": "index"
       }
     },
-    "widgets": {
-      
-    }
+    "widgets": {}
   },
   "display": {
     "titleBarBackgroundColor": "#f2f2f2",
@@ -42,6 +43,9 @@
     "pages": {
       "Login": {
         "titleBarText": "登录"
+      },
+      "SignIn": {
+        "titleBarText": "注册账号"
       }
     }
   }
