@@ -41,7 +41,7 @@
     "menu": true,
     "pages": {
       "Login": {
-        "titleBarText": ""
+        "titleBarText": "登录"
       }
     }
   }

@@ -1,0 +1,27 @@
+.page{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+}
+
+.large-btn{
+    width: 550px;
+    height: 86px;
+    border-radius: 43px;
+}
+
+.green-btn{
+    background-color: #09ba07;
+    color: white
+}
+
+.common-text-box{
+    border-bottom: 2px solid darkgray;
+    width: 550px;
+    height: 86px;
+}
+
+.center-text{
+    text-align: center;
+}
