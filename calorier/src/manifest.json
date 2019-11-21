@@ -14,6 +14,12 @@
     },
     {
       "name": "system.shortcut"
+    },
+    {
+      "name": "system.storage"
+    },
+    {
+      "name": "system.media"
     }
   ],
   "permissions": [
@@ -22,10 +28,13 @@
     }
   ],
   "config": {
-    "logLevel": "debug"
+    "logLevel": "debug",
+    "data":{
+      "choosedPhoto":""
+    }
   },
   "router": {
-    "entry": "Login",
+    "entry": "MainPage",
     "pages": {
       "Login": {
         "component": "index"
@@ -38,6 +47,12 @@
       },
       "ResetPassword": {
         "component": "index"
+      },
+      "MainPage": {
+        "component": "index"
+      },
+      "MainPage/ChoosePhotoUri": {
+        "component": "index"
       }
     },
     "widgets": {}
@@ -45,10 +60,12 @@
   "display": {
     "titleBarBackgroundColor": "#f2f2f2",
     "titleBarTextColor": "#414141",
+    "windowSoftInputMode": "adjustPan",
     "menu": true,
     "pages": {
       "Login": {
-        "titleBarText": "登录"
+        "titleBarText": "登录",
+        "menu": false
       },
       "SignIn": {
         "titleBarText": "注册账号"
@@ -58,6 +75,12 @@
       },
       "ResetPassword": {
         "titleBarText": "重置密码"
+      },
+      "MainPage": {
+        "titleBarText": ""
+      },
+      "MainPage/ChoosePhotoUri": {
+        "titleBarText": "选择图片网址"
       }
     }
   }

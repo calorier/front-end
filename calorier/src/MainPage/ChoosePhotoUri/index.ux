@@ -1,0 +1,33 @@
+<template>
+    <div class="page">
+        <input id="photoUri" type="text" class="large-text-box line-text-box" placeholder="请将图片网址粘贴到此" onchange="setphotoUri" onenterkeyclick="OK" value="{{photoUri}}"></input>
+        <input type="button" class="large-btn green-btn" value="确认" onclick="OK"></input>
+    </div>
+</template>
+<style>
+@import "../../Common/css/main.css";
+
+input {
+  margin: 75px 0;
+}
+</style>
+<script>
+
+import router from '@system.router'
+
+export default {
+    private: {
+        photoUri: ''
+    },
+    OK() {
+        let photoUri = this.photoUri
+        router.replace({
+            photoUri: '/MainPage',
+            params: { photoUri: photoUri }
+        })
+    },
+    setphotoUri(e) {
+        this.photoUri = e.value
+    }
+}
+</script>

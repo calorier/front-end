@@ -1,7 +1,7 @@
 <template>
     <div class="page">
-        <input class="large-text-box line-text-box" type="password" placeholder="请输入新密码" value="{{password}}"></input>
-        <input class="large-text-box line-text-box" type="password" placeholder="请再次确认密码" value="{{pwd}}"></input>
+        <input id="new-password" class="large-text-box line-text-box" type="password" placeholder="请输入新密码" value="{{password}}" onchange="setPassword"></input>
+        <input id="again-password" class="large-text-box line-text-box" type="password" placeholder="请再次确认密码" value="{{repeatPassword}}" onchange="setRepeatPassword"></input>
         <input id="reset" class="large-btn green-btn login-btn" type="button" value="保存并登录" onclick="reset" />
     </div>
 </template>
@@ -17,7 +17,7 @@
   font-size: 32px;
 }
 
-[type="password"] {
+#new-password,#again-password {
   margin: 8px 0 8px 0;
 }
 
@@ -32,7 +32,7 @@ export default {
     },
     private: {
         password: '',
-        pwd: ''
+        repeatPassword: ''
     },
     reset() {
         //TODO:完成重置密码方法
@@ -40,5 +40,11 @@ export default {
     onInit() {
         this.$page.setTitleBar({ text: this.email })
     },
+    setPassword(e){
+        this.password=e.value
+    },
+    setRepeatPassword(e){
+        this.repeatPassword=e.value
+    }
 }
 </script>

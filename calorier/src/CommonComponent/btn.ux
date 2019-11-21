@@ -1,0 +1,70 @@
+<!-- demo -->
+<!-- 
+<import name="btn" src="../components/btn.ux"></import>
+<template>
+  <div class="demo-page">
+    <btn btn-type="primary" title="primary" onclick-btn="clickBtn(0)"></btn>
+    <btn btn-type="warning" title="warning" onclick-btn="clickBtn(1)"></btn>
+    <btn btn-type="danger" title="danger" onclick-btn="clickBtn(2)"></btn>
+  </div>
+</template>
+<script>
+export default {
+  clickBtn(id) {
+    console.log(id)
+  }
+}
+</script>
+
+<style>
+.demo-page {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>
+ -->
+
+<template>
+  <input type="button" class="btn {{btnType}}" value="{{title}}" onclick="clickBtn" />
+</template>
+
+<script>
+export default {
+  props: {
+    btnType: {
+      type: String,
+      default: 'primary'
+    },
+    title: {
+      type: String,
+      default: '点击按键'
+    }
+  },
+  data: {
+  },
+  clickBtn() {
+    this.$emit('clickBtn')
+  }
+}
+</script>
+
+<style>
+.btn {
+  width: 550px;
+  height: 86px;
+  margin-top: 75px;
+  border-radius: 43px;
+  font-size: 35px;
+  color: #ffffff;
+}
+.primary {
+  background-color: #09ba07;
+}
+.warning {
+  background-color: #f0a926;
+}
+.danger {
+  background-color: #e43e3e;
+}
+</style>

@@ -1,0 +1,206 @@
+<template>
+  <div class="page">
+    <tabs class="tabs" index="1" onchange="changeTabactive">
+      <tab-bar class="tab-bar" mode="fixed">
+        <text class="tab-bar-text {{tabIndex === 0 ? 'tab-active' : 'tab-common' }}">记录</text>
+        <text class="tab-bar-text {{tabIndex === 1 ? 'tab-active' : 'tab-common' }}">开始</text>
+        <text class="tab-bar-text {{tabIndex === 2 ? 'tab-active' : 'tab-common' }}">设置</text>
+      </tab-bar>
+      <tab-content class="tab-content" scrollable="{{scrollable}}">
+        <div class="tab-container">
+
+        </div>
+        <div id="start-tab" class="tab-container">
+          <div class="start-tab-title">
+            <text>{{isGetPhoto ? '准备上传' : '开始识别'}}</text>
+          </div>
+          <div class="discern-buttons" if="!isGetPhoto">
+            <div class="discern-button" onclick="discernTakePhoto">
+              <image class="discern-icon" src="{{actBtns[0].icon}}"></image>
+              <text class="discern-text">{{actBtns[0].name}}</text>
+            </div>
+            <div class="discern-button" onclick="discernLocalPhoto">
+              <image class="discern-icon" src="{{actBtns[1].icon}}"></image>
+              <text class="discern-text">{{actBtns[1].name}}</text>
+            </div>
+            <div class="discern-button" onclick="discernWebPhoto">
+              <image class="discern-icon" src="{{actBtns[2].icon}}"></image>
+              <text class="discern-text">{{actBtns[2].name}}</text>
+            </div>
+          </div>
+          <div class="choosed-photo" if="isGetPhoto">
+            <image class="preview-photo" src="{{choosedPhoto}}"></image>
+            <input id="start-discern" class="large-btn green-btn" value="开始识别" type="button" onclick="startDiscern"></input>
+            <input id="rechoose" class="large-btn orange-btn" value="重新选择" type="button" onclick="rechoose"></input>
+          </div>
+        </div>
+        <div id="setting" class="tab-container">
+
+        </div>
+      </tab-content>
+    </tabs>
+  </div>
+</template>
+<script>
+import prompt from '@system.prompt'
+import media from '@system.media'
+import router from '@system.router'
+
+export default {
+  protected: {
+    photoUri: ''
+  },
+  private: {
+    title: ['识别记录', '开始', '设置'],
+
+    scrollable: true,
+    tabIndex: 1,
+    actBtns: [
+      { icon: "../Common/images/icon-take-photo.png", name: "拍摄图片识别" },
+      { icon: "../Common/images/icon-local-photo.png", name: "本地图片识别" },
+      { icon: "../Common/images/icon-web-photo.png", name: "网络图片识别" }
+    ],
+    isGetPhoto: false
+  },
+  changeTabactive(e) {
+    this.tabIndex = e.index
+    this.$page.setTitleBar({ text: this.title[this.tabIndex] })
+  },
+  onInit() {
+    this.$page.setTitleBar({ text: this.title[1] })
+  },
+  discernTakePhoto() {
+    let _this = this
+    media.takePhoto({
+      success: function (data) {
+        _this.isGetPhoto = true
+        _this.choosedPhoto = data.uri
+        //TODO: 将照片发送到服务器上
+      },
+      fail: function (data, code) {
+
+      }
+    })
+  },
+  discernLocalPhoto() {
+    let _this = this
+    media.pickImage({
+      success: function (data) {
+        console.log(data.uri)
+        _this.isGetPhoto = true
+        _this.choosedPhoto = data.uri
+        //TODO: 将照片发送到服务器上
+      },
+      fail: function (data, code) {
+
+      }
+    })
+  },
+  discernWebPhoto() {
+    router.push({
+      uri: '/MainPage/ChoosePhotoUri'
+    })
+  },
+  startDiscern() {
+    //TODO:将图片文件上传到服务器
+  },
+  rechoose() {
+    this.choosedPhoto = ''
+    this.isGetPhoto = false
+  }
+}
+</script>
+
+<style>
+@import "../Common/css/main.css";
+
+.page {
+  padding-bottom: 75px;
+}
+
+#start-discern {
+  margin: 75px 0;
+}
+
+.tab-bar {
+  position: fixed;
+  padding: 25px 0;
+  bottom: 0;
+}
+
+.discern-buttons {
+  flex-direction: column;
+  margin-top: 75px;
+}
+
+.tab-content {
+  align-items: center;
+}
+
+.discern-button {
+  width: 550px;
+  height: 200px;
+  padding: 25px 75px;
+  margin: 50px 0;
+  justify-content: space-between;
+  border: 1px solid #a9a9a9;
+}
+
+.discern-icon {
+  width: 150px;
+  height: 150px;
+}
+
+#start-tab {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 100px;
+}
+
+.tab-container {
+  margin-bottom: 250px;
+}
+
+.tabs {
+  margin: 25px;
+}
+
+.start-tab-title > text {
+  font-size: 54px;
+}
+
+.tab-active {
+  color: #ff0000;
+  font-size: 36px;
+  border-bottom: 5px solid #8faadc;
+}
+
+.tab-common {
+  color: #2f4f4f;
+  font-size: 32px;
+}
+
+.tab-bar-text {
+  padding: 15px;
+}
+
+.preview-photo {
+  width: 550px;
+}
+
+.choosed-photo-text {
+  width: 550px;
+  text-align: center;
+  margin: 30px;
+}
+
+.choosed-photo {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 75px 0;
+}
+</style>
+
+
