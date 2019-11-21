@@ -1,0 +1,115 @@
+<template>
+  <div class="line-item bottom-border" onclick="clickItem(id)">
+    <text class="line-title {{warning ? 'line-title-red' : 'line-title-black'}} {{setTextPosition(textPosition)}}">{{title}}</text>
+    <div class="right-box">
+      <text class="line-remark">{{remark}}</text>
+      <image src="./arrow_right.png" if="showLinkIcon"></image>
+    </div>
+  </div>
+</template>
+
+
+<script>
+export default {
+  props: {
+    title: {
+      type: String,
+      default: 'title'
+    },
+    remark: {
+      type: String,
+      default: 'remark'
+    },
+    showLinkIcon: {
+      type: Boolean,
+      default: false
+    },
+    warning: {
+      type: Boolean,
+      default: false
+    },
+    textPosition: {
+      type: String,
+      default: 'left'
+    },
+    id: [String, Number]
+  },
+  data: {
+  },
+  clickItem(id) {
+    this.$emit('clickItem', { id })
+  },
+  setTextPosition(pos) {
+    switch (pos) {
+      case 'left':
+        return 'line-title-left'
+        break
+      case 'center':
+        return 'line-title-center'
+        break
+      case 'right':
+        return 'line-title-right'
+        break
+      default:
+        break
+    }
+  }
+}
+</script>
+
+<style>
+.line-box {
+  width: 100%;
+  flex-direction: column;
+  margin-top: 15px;
+  background-color: #fff;
+  padding-left: 30px;
+  padding-right: 0;
+  justify-content: space-between;
+}
+.line-item {
+  height: 100px;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 30px;
+  border: 1px solid transparent;
+}
+.bottom-border {
+  border-bottom-color: #e6e6e6;
+}
+.line-title {
+  font-size: 30px;
+}
+.right-box {
+  align-items: center;
+}
+.line-remark {
+  color: #adadad;
+  font-size: 25px;
+}
+image {
+  margin-left: 20px;
+  width: 18px;
+}
+
+.line-title-red {
+  color: #ff0000;
+}
+
+.line-title-black {
+  color: #696969;
+}
+
+.line-title-center {
+  text-align: center;
+  width: 100%;
+}
+
+.line-title-left {
+  text-align: left;
+}
+
+.line-title-right {
+  text-align: right;
+}
+</style>

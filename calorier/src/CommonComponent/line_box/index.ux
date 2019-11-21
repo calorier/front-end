@@ -1,0 +1,82 @@
+<!-- demo -->
+<!-- 
+<import name="line-box" src="../components/line_box"></import>
+
+<template>
+  <div class="demo-page">
+    <line-box for="{{lineList}}" list="{{$item}}" onclick-item="clickItem"></line-box>
+  </div>
+</template>
+
+<script>
+
+export default {
+  private: {
+    lineList: [
+      [
+        { title: '消息', remark: '', id: 0 },
+        { title: '通知', remark: '', id: 1 }
+      ],
+      [
+        { title: '我的钱包', remark: '手机充值', id: 2 },
+        { title: '用户反馈', remark: '', id: 3 }
+      ]
+    ]
+  },
+  clickItem(e) {
+    console.log(e.detail.id)
+  }
+}
+</script>
+
+<style>
+.demo-page {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #f4f5f7;
+}
+</style>
+ -->
+
+
+<import name="line-item" src="./line_item.ux"></import>
+
+<template>
+  <div class="line-box">
+    <line-item for="{{list}}" onclick-item="clickItem"></line-item>
+  </div>
+</template>
+
+
+<script>
+export default {
+  props: {
+    list: {
+      type: Array,
+      default() {
+        return [
+          { title: '消息', remark: '', id: '0' }
+        ]
+      }
+    }
+  },
+  data: {
+  },
+  clickItem(e) {
+    this.$emit('clickItem', {id: e.detail.id})
+  }
+}
+</script>
+
+<style>
+.line-box {
+  width: 100%;
+  flex-direction: column;
+  margin-top: 15px;
+  background-color: #fff;
+  padding-left: 30px;
+  padding-right: 0;
+  justify-content: space-between;
+}
+</style>

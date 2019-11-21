@@ -1,3 +1,6 @@
+<import name="line-box" src="../CommonComponent/line_box"></import>
+ 
+
 <template>
   <div class="page">
     <tabs class="tabs" index="1" onchange="changeTabactive">
@@ -35,7 +38,7 @@
           </div>
         </div>
         <div id="setting" class="tab-container">
-
+          <line-box for="{{lineList}}" list="{{$item}}" onclick-item="clickSettingListItem"></line-box>
         </div>
       </tab-content>
     </tabs>
@@ -60,7 +63,17 @@ export default {
       { icon: "../Common/images/icon-local-photo.png", name: "本地图片识别" },
       { icon: "../Common/images/icon-web-photo.png", name: "网络图片识别" }
     ],
-    isGetPhoto: false
+    isGetPhoto: false,
+    lineList: [
+      [
+        { title: '账户设置', remark: '', showLinkIcon: true, id: 'account-setting' },
+        { title: '通知', remark: '', showLinkIcon: true, id: 'notice' }
+      ],
+      [
+        { title: '注销登录', remark: '', id: 'logout' },
+        { title: '退出Calorier', remark: '', warning: true, id: 'exit' }
+      ]
+    ]
   },
   changeTabactive(e) {
     this.tabIndex = e.index
@@ -107,6 +120,42 @@ export default {
   rechoose() {
     this.choosedPhoto = ''
     this.isGetPhoto = false
+  },
+  clickSettingListItem(e) {
+    switch (e.detail.id) {
+      case 'account-setting':
+        //TODO:转到账户设置页面
+        break;
+      case 'notice':
+        //TODO:转到通知页面
+        break
+      case 'logout':
+        logout()
+        break;
+      case 'exit':
+        this.$app.exit()
+        break;
+      default:
+        break;
+    }
+
+    function logout() {
+      prompt.showDialog({
+        title: '警告',
+        message: '您确认要注销当前账号吗？',
+        buttons: [
+          { text: '确认', color: 'green' },
+          { text: '取消', color: 'darkgray' }
+        ],
+        success: function (data) {
+          if (data.index === 0) {
+            router.replace({
+              uri: 'Login'
+            })
+          }
+        }
+      })
+    }
   }
 }
 </script>
@@ -200,6 +249,11 @@ export default {
   justify-content: center;
   flex-direction: column;
   margin: 75px 0;
+}
+
+#setting {
+  flex-direction: column;
+  justify-content: flex-start;
 }
 </style>
 
