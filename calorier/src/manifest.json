@@ -29,8 +29,8 @@
   ],
   "config": {
     "logLevel": "debug",
-    "data":{
-      "choosedPhoto":""
+    "data": {
+      "choosedPhoto": ""
     }
   },
   "router": {
@@ -52,6 +52,12 @@
         "component": "index"
       },
       "MainPage/ChoosePhotoUri": {
+        "component": "index"
+      },
+      "MainPage/AccountSetting": {
+        "component": "index"
+      },
+      "MainPage/AccountSetting/ChangeUsername": {
         "component": "index"
       }
     },
@@ -81,6 +87,12 @@
       },
       "MainPage/ChoosePhotoUri": {
         "titleBarText": "选择图片网址"
+      },
+      "MainPage/AccountSetting": {
+        "titleBarText": "账户设置"
+      },
+      "MainPage/AccountSetting/ChangeUsername": {
+        "titleBarText": "更改用户名"
       }
     }
   }

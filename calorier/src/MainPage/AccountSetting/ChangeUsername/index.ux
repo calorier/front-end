@@ -1,0 +1,38 @@
+<import name="area_text_box" src="../../../CommonComponent/area_text_box"></import>
+
+<import name="btn" src="../../../CommonComponent/btn"></import>
+
+<template>
+    <div class="page">
+        <area_text_box data="{{username}}" length="{{length}}" oninput-data="inputData" onclear-text="clearText"></area_text_box>
+        <btn title="保存" btn-type="primary" onclick-btn="submit"></btn>
+    </div>
+</template>
+<style>
+@import "../../../Common/css/main.css";
+
+.page {
+  justify-content: flex-start;
+  background-color: #f8f8ff;
+}
+</style>
+<script>
+export default {
+    protected: {
+        username: 'test111111111'
+    },
+    private: {
+        length:12 
+    },
+    submit() {
+        console.log('更改后的用户名' + this.username)
+        //TODO: 将this.username上传到服务器
+    },
+    inputData(e) {
+        this.username = e.detail.data
+    },
+    clearText() {
+        this.username = ''
+    }
+}
+</script>

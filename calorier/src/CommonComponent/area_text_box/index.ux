@@ -1,0 +1,81 @@
+<template>
+  <div class="component">
+    <div class="box">
+      <input type="text" class="text" value="{{data}}" onchange="inputData" />
+      <image src="./icon-clear-text.png" onclick="clearText"></image>
+    </div>
+    <text class="label {{data.length > length ? 'warning' : '' }}">{{data.length}} / {{length}}</text>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    data: {
+      type: String,
+      default: ''
+    },
+    length: {
+      type: Number,
+      default: 100
+    }
+  },
+  data: {
+  },
+  inputData(e) {
+    this.$emit('inputData', { data: e.value })
+  },
+  clearText() {
+    console.log('clear')
+    this.$emit('clearText', { data: '' })
+  }
+}
+</script>
+
+<style>
+.box {
+  width: 750px;
+  padding: 30px;
+  height: 128px;
+  background-color: #ffffff;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px 0;
+  align-items: center;
+  /* border: 1px solid #000000; */
+}
+
+.component{
+  flex-direction: column;
+  margin: 10px 0;
+  justify-content: flex-start;
+}
+
+.text {
+  flex: 1;
+  /* border: 1px solid #000000; */
+}
+
+image {
+  width: 50px;
+  height: 50px;
+}
+
+.clear-btn {
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+}
+
+.label {
+  margin: 10px 0;
+  width: 710px;
+  font-size: 24px;
+  text-align: center;
+  /* border: 1px solid #000000; */
+}
+
+.warning {
+  color: #ff0000;
+}
+</style>
