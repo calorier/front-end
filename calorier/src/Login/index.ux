@@ -7,8 +7,11 @@
         <!-- 登录框集合组件 -->
         <div class="login-box">
             <div class="input-box">
-                <input class="large-text-box line-text-box login-text" type="text" value="{{username}}" placeholder="请输入用户名/邮箱" onchange="setUsername"/>
-                <input class="large-text-box line-text-box login-text" type="password" value="{{password}}" placeholder="请输入密码" onchange="setPassword"/>
+                <input class="large-text-box line-text-box login-text" type="text" value="{{usernameOrEmail}}" placeholder="请输入用户名/邮箱" onchange="setUsernameOrEmail" />
+                <input class="large-text-box line-text-box login-text" type="password" value="{{password}}" placeholder="请输入密码" onchange="setPassword" />
+            </div>
+            <div class="hint-box">
+                <text class="hint">{{hint}}</text>
             </div>
             <input class="large-btn green-btn login-btn" type="button" value="登录" onclick="login" />
         </div>
@@ -47,24 +50,48 @@
 #forget-pwd {
   color: #ff0000;
 }
+
+.hint {
+  color: #ff0000;
+  font-size: 24px;
+  height: 28px;
+  align-items: center;
+  text-align: center;
+  margin: 10px;
+}
+
+.hint-box{
+    width: 550px;
+    align-items: center;
+    text-align: center;
+}
 </style>
 <script>
 
 export default {
     private: {
-        username: '',
+        usernameOrEmail: '',
         password: '',
-        icon: '../Common/logo.png'
+        icon: '../Common/logo.png',
+        hint: '21231321321' //提示信息都在这里显示
     },
     login() {
         //TODO:补全登录代码
         //检查格式
+        var emailReg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/
+        if (emailReg.test(this.usernameOrEmail)){
+            //TODO: 将邮箱密码发送
+            
+        }else {
+            //TODO: 将账号密码发送
+        }
+
     },
-    setUserName(e){
-        this.username=e.value
+    setUsernameOrEmail(e) {
+        this.usernameOrEmail = e.value
     },
-    setPassword(e){
-        this.password=e.value
+    setPassword(e) {
+        this.password = e.value
     }
 }
 
