@@ -1,7 +1,12 @@
-<import name="media-list" src=""></import>
+<import name="record-list" src="../Components/record_list"></import>
+<import name="search-box" src="../Components/search_box"></import>
+ 
 
 <template>
-  <media-list list="{{article.list}}" show-load="{{article.load}}" onload-more="queryList" ondetail="detail"></media-list>
+  <div class="page">
+    <search-box type="border" onsearch="search"></search-box>
+    <record-list list="{{article.list}}" show-load="{{article.load}}" onload-more="queryList" ondetail="detail"></record-list>
+  </div>
 </template>
 
 <script>

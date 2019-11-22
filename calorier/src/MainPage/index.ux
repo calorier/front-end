@@ -1,5 +1,7 @@
 <import name="line-box" src="../Components/line_box"></import>
 <import name="btn" src="../Components/btn"></import>
+<import name="search-box" src="../Components/search_box"></import>
+ 
  
 <template>
   <div class="page">
@@ -13,7 +15,7 @@
       <tab-content class="tab-content" scrollable="{{scrollable}}">
         <!-- 记录界面 -->
         <div class="tab-container">
-
+          <search-box type="border" onsearch="searchRecord" oninput="inputSearchText"></search-box>
         </div>
         <div id="start-tab" class="tab-container">
           <div class="start-tab-title">
@@ -89,7 +91,8 @@ export default {
         { title: '退出当前账号', remark: '', id: 'logout' },
         { title: '退出', remark: '', warning: true, id: 'exit' }
       ]
-    ]
+    ],
+    searchTextOfRecord: ''
   },
   changeTabactive(e) {
     this.tabIndex = e.index
@@ -141,10 +144,10 @@ export default {
     let _this = this
     switch (e.detail.id) {
       case 'account-setting':
-        
+
         router.push({
           uri: 'MainPage/AccountSetting',
-          params: {username: _this.username , email: _this.email}
+          params: { username: _this.username, email: _this.email }
         })
         break;
       case 'notice':
@@ -177,6 +180,13 @@ export default {
         }
       })
     }
+  },
+  searchRecord() {
+    //TODO: 从数据库中搜索
+    console.log('搜索：' + this.searchTextOfRecord)
+  },
+  inputSearchText(e) {
+    this.searchTextOfRecord = e.detail.value
   }
 }
 </script>

@@ -1,0 +1,77 @@
+<template>
+    <div class="search {{type}}">
+        <div class="search-box">
+            <input type="text" placeholder="请输入搜索内容" enterkeytype="搜索" onchange="input" onenterkeyclick="search"></input>
+            <image src="../../Common/images/icon-search-gray.png" onclick="search"></image>
+        </div>
+        <text class="search-text" if="{{showText}}" onclick="search">搜索</text>
+    </div>
+</template>
+
+<script>
+export default {
+    props: {
+        type: {
+            type: String,
+            default: 'border'
+        },
+        showText: {
+            type: Boolean,
+            default: false
+        }
+    },
+    search() {
+        this.$emit('search')
+    },
+    input(e) {
+        // console.log(e)
+        this.$emit('input',{value : e.value})
+    }
+}
+</script>
+
+<style>
+.search {
+  width: 100%;
+  padding: 18px;
+  height: 86px;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.line {
+    border-bottom: 2px solid #a9a9a9;
+}
+
+.border{
+    border: 2px solid #a9a9a9;
+    border-radius: 2px;
+}
+
+.search-box > image {
+  width: 50px;
+  height: 50px;
+  flex: 0;
+  margin: 0 35px;
+}
+
+.search-box > input {
+  height: 50px;
+  font-size: 36px;
+  flex: 1;
+  width: 550px;
+}
+
+.search > .search-text {
+  font-size: 36px;
+  border-radius: 2px;
+  width: 100px;
+  flex: 0;
+  height: 50px;
+}
+
+
+</style>
+
+

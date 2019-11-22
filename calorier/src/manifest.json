@@ -34,7 +34,7 @@
     }
   },
   "router": {
-    "entry": "Login",
+    "entry": "MainPage",
     "pages": {
       "Login": {
         "component": "index"
