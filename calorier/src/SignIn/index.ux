@@ -14,6 +14,11 @@
 <style>
 @import "../Common/css/main.css";
 
+.page{
+    margin-top: 75px;
+    justify-content: flex-start;
+}
+
 input {
   font-size: 32px;
 }

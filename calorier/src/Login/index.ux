@@ -73,10 +73,10 @@ export default {
         usernameOrEmail: '',
         password: '',
         icon: '../Common/logo.png',
-        hint: '21231321321' //提示信息都在这里显示
+        hint: '错误信息' //提示信息都在这里显示
     },
     login() {
-        //TODO:补全登录代码
+        //TODO:补全登录代码，如果登陆失败，将提示信息传入到this.hint中
         //检查格式
         var emailReg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/
         if (emailReg.test(this.usernameOrEmail)){
