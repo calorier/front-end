@@ -1,6 +1,6 @@
 <import name="line-box" src="../CommonComponent/line_box"></import>
-
-
+<import name="btn" src="../CommonComponent/btn"></import>
+ 
 <template>
   <div class="page">
     <tabs class="tabs" index="1" onchange="changeTabactive">
@@ -33,9 +33,10 @@
           </div>
           <div class="choosed-photo" if="isGetPhoto">
             <image class="preview-photo" src="{{choosedPhoto}}"></image>
-            <input id="start-discern" class="large-btn green-btn" value="开始识别" type="button"
-              onclick="startDiscern"></input>
-            <input id="rechoose" class="large-btn orange-btn" value="重新选择" type="button" onclick="rechoose"></input>
+            <!-- <input id="start-discern" class="large-btn green-btn" value="开始识别" type="button" onclick="startDiscern"></input> -->
+            <btn btn-type="primary" title="开始识别" onclick-btn="startDiscern"></btn>
+            <!-- <input id="rechoose" class="large-btn orange-btn" value="重新选择" type="button" onclick="rechoose"></input> -->
+            <btn btn-type="warning" title="重新选择" onclick-btn="rechoose"></btn>
           </div>
         </div>
         <div id="setting" class="tab-container">
@@ -46,216 +47,225 @@
   </div>
 </template>
 <script>
-  import prompt from '@system.prompt'
-  import media from '@system.media'
-  import router from '@system.router'
+import prompt from '@system.prompt'
+import media from '@system.media'
+import router from '@system.router'
 
-  export default {
-    protected: {
-      photoUri: ''
-    },
-    private: {
-      title: ['识别记录', '开始', '设置'],
+export default {
+  protected: {
+    photoUri: '',
+    username: '',
+    userid: -1,
+    email: '',
+    avatar: '',
+    phone: '',
+    createTime: ''
+  },
+  private: {
+    title: ['识别记录', '开始', '设置'],
 
-      scrollable: true,
-      tabIndex: 1,
-      actBtns: [
-        { icon: "../Common/images/icon-take-photo.png", name: "拍摄图片识别" },
-        { icon: "../Common/images/icon-local-photo.png", name: "本地图片识别" },
-        { icon: "../Common/images/icon-web-photo.png", name: "网络图片识别" }
+    scrollable: true,
+    tabIndex: 1,
+    actBtns: [
+      { icon: "../Common/images/icon-take-photo.png", name: "拍摄图片识别" },
+      { icon: "../Common/images/icon-local-photo.png", name: "本地图片识别" },
+      { icon: "../Common/images/icon-web-photo.png", name: "网络图片识别" }
+    ],
+    isGetPhoto: false,
+    lineList: [
+      [
+        { title: '账户设置', remark: '', showLinkIcon: true, id: 'account-setting' },
+        { title: '通知', remark: '', showLinkIcon: true, id: 'notice' }
       ],
-      isGetPhoto: false,
-      lineList: [
-        [
-          { title: '账户设置', remark: '', showLinkIcon: true, id: 'account-setting' },
-          { title: '通知', remark: '', showLinkIcon: true, id: 'notice' }
-        ],
-        [
-          { title: '退出当前账号', remark: '', id: 'logout' },
-          { title: '退出', remark: '', warning: true, id: 'exit' }
-        ]
+      [
+        { title: '退出当前账号', remark: '', id: 'logout' },
+        { title: '退出', remark: '', warning: true, id: 'exit' }
       ]
-    },
-    changeTabactive(e) {
-      this.tabIndex = e.index
-      this.$page.setTitleBar({ text: this.title[this.tabIndex] })
-    },
-    onInit() {
-      this.$page.setTitleBar({ text: this.title[1] })
-    },
-    discernTakePhoto() {
-      let _this = this
-      media.takePhoto({
-        success: function (data) {
-          _this.isGetPhoto = true
-          _this.choosedPhoto = data.uri
-          //TODO: 将照片发送到服务器上
-        },
-        fail: function (data, code) {
+    ]
+  },
+  changeTabactive(e) {
+    this.tabIndex = e.index
+    this.$page.setTitleBar({ text: this.title[this.tabIndex] })
+  },
+  onInit() {
+    this.$page.setTitleBar({ text: this.title[1] })
+  },
+  discernTakePhoto() {
+    let _this = this
+    media.takePhoto({
+      success: function (data) {
+        _this.isGetPhoto = true
+        _this.choosedPhoto = data.uri
+        //TODO: 将照片发送到服务器上
+      },
+      fail: function (data, code) {
 
-        }
-      })
-    },
-    discernLocalPhoto() {
-      let _this = this
-      media.pickImage({
-        success: function (data) {
-          console.log(data.uri)
-          _this.isGetPhoto = true
-          _this.choosedPhoto = data.uri
-          //TODO: 将照片发送到服务器上
-        },
-        fail: function (data, code) {
-
-        }
-      })
-    },
-    discernWebPhoto() {
-      router.push({
-        uri: '/MainPage/ChoosePhotoUri'
-      })
-    },
-    startDiscern() {
-      //TODO:将图片文件上传到服务器
-    },
-    rechoose() {
-      this.choosedPhoto = ''
-      this.isGetPhoto = false
-    },
-    clickSettingListItem(e) {
-      switch (e.detail.id) {
-        case 'account-setting':
-          router.push({
-            uri: 'MainPage/AccountSetting'
-          })
-          break;
-        case 'notice':
-          //TODO:转到通知页面
-          break
-        case 'logout':
-          logout()
-          break;
-        case 'exit':
-          this.$app.exit()
-          break;
-        default:
-          break;
       }
+    })
+  },
+  discernLocalPhoto() {
+    let _this = this
+    media.pickImage({
+      success: function (data) {
+        console.log(data.uri)
+        _this.isGetPhoto = true
+        _this.choosedPhoto = data.uri
+        //TODO: 将照片发送到服务器上
+      },
+      fail: function (data, code) {
 
-      function logout() {
-        prompt.showDialog({
-          title: '警告',
-          message: '您确认要注销当前账号吗？',
-          buttons: [
-            { text: '确认', color: 'green' },
-            { text: '取消', color: 'darkgray' }
-          ],
-          success: function (data) {
-            if (data.index === 0) {
-              router.replace({
-                uri: 'Login'
-              })
-            }
-          }
+      }
+    })
+  },
+  discernWebPhoto() {
+    router.push({
+      uri: '/MainPage/ChoosePhotoUri'
+    })
+  },
+  startDiscern() {
+    //TODO:将图片文件上传到服务器
+  },
+  rechoose() {
+    this.choosedPhoto = ''
+    this.isGetPhoto = false
+  },
+  clickSettingListItem(e) {
+    let _this = this
+    switch (e.detail.id) {
+      case 'account-setting':
+        
+        router.push({
+          uri: 'MainPage/AccountSetting',
+          params: {username: _this.username , email: _this.email}
         })
-      }
+        break;
+      case 'notice':
+        //TODO:转到通知页面
+        break
+      case 'logout':
+        logout()
+        break;
+      case 'exit':
+        this.$app.exit()
+        break;
+      default:
+        break;
+    }
+
+    function logout() {
+      prompt.showDialog({
+        title: '警告',
+        message: '您确认要注销当前账号吗？',
+        buttons: [
+          { text: '确认', color: 'green' },
+          { text: '取消', color: 'darkgray' }
+        ],
+        success: function (data) {
+          if (data.index === 0) {
+            router.replace({
+              uri: 'Login'
+            })
+          }
+        }
+      })
     }
   }
+}
 </script>
 
 <style>
-  @import "../Common/css/main.css";
+@import "../Common/css/main.css";
 
-  .page {
-    padding-bottom: 75px;
-  }
+.page {
+  padding-bottom: 75px;
+}
 
-  #start-discern {
-    margin: 75px 0;
-  }
+#start-discern {
+  margin: 75px 0;
+}
 
-  .tab-bar {
-    position: fixed;
-    padding: 25px 0;
-    bottom: 0;
-  }
+.tab-bar {
+  position: fixed;
+  padding: 25px 0;
+  bottom: 0;
+}
 
-  .discern-buttons {
-    flex-direction: column;
-    margin-top: 75px;
-  }
+.discern-buttons {
+  flex-direction: column;
+  margin-top: 75px;
+}
 
-  .tab-content {
-    align-items: center;
-  }
+.tab-content {
+  align-items: center;
+}
 
-  .discern-button {
-    width: 550px;
-    height: 200px;
-    padding: 25px 75px;
-    margin: 50px 0;
-    justify-content: space-between;
-    border: 1px solid #a9a9a9;
-  }
+.discern-button {
+  width: 550px;
+  height: 200px;
+  padding: 25px 75px;
+  margin: 50px 0;
+  justify-content: space-between;
+  border: 1px solid #a9a9a9;
+}
 
-  .discern-icon {
-    width: 150px;
-    height: 150px;
-  }
+.discern-icon {
+  width: 150px;
+  height: 150px;
+}
 
-  #start-tab {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding-top: 100px;
-  }
+#start-tab {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 50px;
+}
 
-  .tab-container {
-    margin-bottom: 250px;
-  }
+.tab-container {
+  margin-bottom: 250px;
+}
 
-  .tabs {
-    margin: 25px;
-  }
+.tabs {
+  margin: 25px;
+}
 
-  .start-tab-title>text {
-    font-size: 54px;
-  }
+.start-tab-title > text {
+  font-size: 54px;
+}
 
-  .tab-active {
-    color: #ff0000;
-    font-size: 36px;
-    border-bottom: 5px solid #8faadc;
-  }
+.tab-active {
+  color: #ff0000;
+  font-size: 36px;
+  border-bottom: 5px solid #8faadc;
+}
 
-  .tab-common {
-    color: #2f4f4f;
-    font-size: 32px;
-  }
+.tab-common {
+  color: #2f4f4f;
+  font-size: 32px;
+}
 
-  .tab-bar-text {
-    padding: 15px;
-  }
+.tab-bar-text {
+  padding: 15px;
+}
 
-  .preview-photo {
-    width: 550px;
-  }
+.preview-photo {
+  width: 550px;
+}
 
-  .choosed-photo-text {
-    width: 550px;
-    text-align: center;
-    margin: 30px;
-  }
+.choosed-photo-text {
+  width: 550px;
+  text-align: center;
+  margin: 30px;
+}
 
-  .choosed-photo {
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin: 75px 0;
-  }
+.choosed-photo {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 75px 0;
+}
 
-  #setting {
-    flex-direction: column;
-    justify-content: flex-start;
-  }
+#setting {
+  flex-direction: column;
+  justify-content: flex-start;
+}
 </style>

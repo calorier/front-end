@@ -1,8 +1,16 @@
+<import name="btn" src="../CommonComponent/btn"></import>
+ 
 <template>
     <div class="page">
+        <!-- 输入框 -->
         <input id="new-password" class="large-text-box line-text-box" type="password" placeholder="请输入新密码" value="{{password}}" onchange="setPassword"></input>
         <input id="again-password" class="large-text-box line-text-box" type="password" placeholder="请再次确认密码" value="{{repeatPassword}}" onchange="setRepeatPassword"></input>
-        <input id="reset" class="large-btn green-btn login-btn" type="button" value="保存并登录" onclick="reset" />
+        <!-- 错误信息提示 -->
+        <div class="hint-box">
+            <text class="hint">{{hint}}</text>
+        </div>
+        <!-- 确认按钮 -->
+        <btn btn-type="primary" title="保存并登录" onclick-btn="reset"></btn>
     </div>
 </template>
 <style>
@@ -24,6 +32,7 @@
 #reset {
   margin-top: 75px;
 }
+
 </style>
 <script>
 export default {
@@ -32,7 +41,8 @@ export default {
     },
     private: {
         password: '',
-        repeatPassword: ''
+        repeatPassword: '',
+        hint:'错误信息'
     },
     reset() {
         //TODO:完成重置密码方法

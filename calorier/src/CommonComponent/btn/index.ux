@@ -62,9 +62,9 @@ export default {
   background-color: #09ba07;
 }
 .warning {
-  background-color: #f0a926;
+  background-color: #ffa500;
 }
 .danger {
-  background-color: #e43e3e;
+  background-color: #ff0000;
 }
 </style>

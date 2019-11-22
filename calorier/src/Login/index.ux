@@ -1,3 +1,6 @@
+<import name="btn" src="../CommonComponent/btn"></import>
+ 
+
 <template>
     <div class="page">
         <!-- 软件logo -->
@@ -13,14 +16,15 @@
             <div class="hint-box">
                 <text class="hint">{{hint}}</text>
             </div>
-            <input class="large-btn green-btn login-btn" type="button" value="登录" onclick="login" />
+            <btn btn-type="primary" title="登录" onclick-btn="login"></btn>
         </div>
         <!-- 页脚组件 -->
         <div class="foot">
             <a href="/SignIn">注册账号</a>
             <a id="forget-pwd" href="/FindPassword">忘记密码</a>
             <text>
-                <!-- 其他信息 --></text>
+                <!-- 其他信息 -->
+            </text>
         </div>
     </div>
 </template>
@@ -50,24 +54,9 @@
 #forget-pwd {
   color: #ff0000;
 }
-
-.hint {
-  color: #ff0000;
-  font-size: 24px;
-  height: 28px;
-  align-items: center;
-  text-align: center;
-  margin: 10px;
-}
-
-.hint-box{
-    width: 550px;
-    align-items: center;
-    text-align: center;
-}
 </style>
 <script>
-
+import router from '@system.router'
 export default {
     private: {
         usernameOrEmail: '',
@@ -79,13 +68,27 @@ export default {
         //TODO:补全登录代码，如果登陆失败，将提示信息传入到this.hint中
         //检查格式
         var emailReg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/
-        if (emailReg.test(this.usernameOrEmail)){
+        if (emailReg.test(this.usernameOrEmail)) {
             //TODO: 将邮箱密码发送
-            
-        }else {
+
+        } else {
             //TODO: 将账号密码发送
         }
 
+        //用于测试的 用户对象
+        let data = {
+            username: 'test',
+            userid: 1,
+            email: 'example@xxx.xxx',
+            avatar: '../Common/logo.png',
+            phone: '123456',
+            createTime: 'YYYY-MM-DD HH:mm:ss'
+        } 
+        //转到主界面
+        router.replace({
+            uri: '/MainPage',
+            params: data
+        })
     },
     setUsernameOrEmail(e) {
         this.usernameOrEmail = e.value

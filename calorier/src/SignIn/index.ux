@@ -1,3 +1,5 @@
+<import name="btn" src="../CommonComponent/btn"></import>
+ 
 <template>
     <div class="page">
         <input class="large-text-box line-text-box" type="text" placeholder="请输入用户名" value="{{username}}" onchange="setUsername"></input>
@@ -8,7 +10,10 @@
             <input class="small-text-box line-text-box" type="text" placeholder="请输入邮箱验证码" value="{{verifyCode}}" onchange="setVerifyCode"></input>
             <input class="small-btn orange-btn" type="button" value="{{verifyBtn}}"></input>
         </div>
-        <input id="signIn" class="large-btn orange-btn login-btn" type="button" value="注册" onclick="signIn" />
+        <div class="hint-box">
+            <text class="hint">{{hint}}</text>
+        </div>
+        <btn btn-type="warning" title="注册" onclick-btn="signIn"></btn>
     </div>
 </template>
 <style>
@@ -30,6 +35,7 @@ input {
 #signIn {
   margin: 75px 0 0 0;
 }
+
 </style>
 <script>
 export default {
@@ -39,10 +45,11 @@ export default {
         password: '',
         repeatPassword: '',
         email: '',
-        verifyCode: ''
+        verifyCode: '',
+        hint: '错误信息'
     },
     signIn() {
-        //TODO: 补全登录代码
+        //TODO: 补全注册代码
     },
     setUsername(e){
         this.username=e.value

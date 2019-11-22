@@ -69,3 +69,19 @@
   .verify-code > input {
     flex: 1;
   }
+
+
+  .hint {
+    color: #ff0000;
+    font-size: 24px;
+    flex-direction: column;
+    height: 28px;
+    align-items: center;
+    text-align: left;
+    margin: 10px;
+  }
+  
+  .hint-box{
+      width: 550px;
+      text-align: left;
+  }

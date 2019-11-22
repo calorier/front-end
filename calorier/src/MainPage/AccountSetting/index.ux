@@ -6,48 +6,52 @@
     </div>
 </template>
 <style>
-    @import '../../Common/css/main.css';
+@import "../../Common/css/main.css";
 
-    .page {
-        justify-content: flex-start;
-    }
+.page {
+  justify-content: flex-start;
+}
 </style>
 <script>
-    import router from '@system.router'
+import router from '@system.router'
 
-    export default {
-        private: {
-            lineList: [
-                [
-                    { title: '用户名', remark: '', id: 'username' },
-                    // {title:'手机号',remark:'',id:'phone'},
-                    { title: '邮箱', remark: '', id: 'email' }
-                ]
+export default {
+    protected: {
+        username: '',
+        email: ''
+    },
+    private: {
+        lineList: [
+            [
+                { title: '用户名', remark: '', id: 'username' },
+                // {title:'手机号',remark:'',id:'phone'},
+                { title: '邮箱', remark: '', id: 'email' }
             ]
-        },
-        clickLineListItem(e) {
-            switch (e.detail.id) {
-                case 'username':
-                    router.push({
-                      uri: '/MainPage/AccountSetting/ChangeUsername',
-                      params: {username: this.lineList[0][0].remark}
-                    })
-                    break
-                case 'email':
-                    //TODO:修改绑定邮箱，需手机号辅助，
-                    break
-                case 'phone':
-                    //TODO:修改绑定手机，需邮箱辅助
-                    break
-                default:
-                    break
-            }
-        },
-        onInit(){
-            //TODO: 初始化用户用户名和邮箱电话号等信息
-            this.lineList[0][0].remark='92Yan'
-            this.lineList[0][1].remark='1789446861@qq.com'
+        ]
+    },
+    clickLineListItem(e) {
+        switch (e.detail.id) {
+            case 'username':
+                router.push({
+                    uri: '/MainPage/AccountSetting/ChangeUsername',
+                    params: { username: this.lineList[0][0].remark }
+                })
+                break
+            case 'email':
+                //TODO:修改绑定邮箱，需手机号辅助，
+                break
+            case 'phone':
+                //TODO:修改绑定手机，需邮箱辅助
+                break
+            default:
+                break
         }
+    },
+    onInit() {
+        //TODO: 初始化用户用户名和邮箱电话号等信息
+        this.lineList[0][0].remark = this.username
+        this.lineList[0][1].remark = this.email
     }
+}
 
 </script>
