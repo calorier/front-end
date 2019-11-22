@@ -1,15 +1,17 @@
-<import name="line-box" src="../CommonComponent/line_box"></import>
-<import name="btn" src="../CommonComponent/btn"></import>
+<import name="line-box" src="../Components/line_box"></import>
+<import name="btn" src="../Components/btn"></import>
  
 <template>
   <div class="page">
     <tabs class="tabs" index="1" onchange="changeTabactive">
+      <!-- 底部导航区 -->
       <tab-bar class="tab-bar" mode="fixed">
         <text class="tab-bar-text {{tabIndex === 0 ? 'tab-active' : 'tab-common' }}">记录</text>
         <text class="tab-bar-text {{tabIndex === 1 ? 'tab-active' : 'tab-common' }}">开始</text>
         <text class="tab-bar-text {{tabIndex === 2 ? 'tab-active' : 'tab-common' }}">设置</text>
       </tab-bar>
       <tab-content class="tab-content" scrollable="{{scrollable}}">
+        <!-- 记录界面 -->
         <div class="tab-container">
 
         </div>
@@ -17,28 +19,34 @@
           <div class="start-tab-title">
             <text>{{isGetPhoto ? '准备上传' : '开始识别'}}</text>
           </div>
+          <!-- 识别方式按钮组 -->
           <div class="discern-buttons" if="!isGetPhoto">
+            <!-- 拍摄识别 -->
             <div class="discern-button" onclick="discernTakePhoto">
               <image class="discern-icon" src="{{actBtns[0].icon}}"></image>
               <text class="discern-text">{{actBtns[0].name}}</text>
             </div>
+            <!-- 本地识别 -->
             <div class="discern-button" onclick="discernLocalPhoto">
               <image class="discern-icon" src="{{actBtns[1].icon}}"></image>
               <text class="discern-text">{{actBtns[1].name}}</text>
             </div>
+            <!-- 网络识别 -->
             <div class="discern-button" onclick="discernWebPhoto">
               <image class="discern-icon" src="{{actBtns[2].icon}}"></image>
               <text class="discern-text">{{actBtns[2].name}}</text>
             </div>
           </div>
+          <!-- 选择图片后显示此界面 -->
           <div class="choosed-photo" if="isGetPhoto">
+            <!-- 已选择的图片预览 -->
             <image class="preview-photo" src="{{choosedPhoto}}"></image>
-            <!-- <input id="start-discern" class="large-btn green-btn" value="开始识别" type="button" onclick="startDiscern"></input> -->
+            <!-- 操作 -->
             <btn btn-type="primary" title="开始识别" onclick-btn="startDiscern"></btn>
-            <!-- <input id="rechoose" class="large-btn orange-btn" value="重新选择" type="button" onclick="rechoose"></input> -->
             <btn btn-type="warning" title="重新选择" onclick-btn="rechoose"></btn>
           </div>
         </div>
+        <!-- 设置界面 -->
         <div id="setting" class="tab-container">
           <line-box for="{{lineList}}" list="{{$item}}" onclick-item="clickSettingListItem"></line-box>
         </div>

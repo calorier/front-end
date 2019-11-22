@@ -59,6 +59,9 @@
       },
       "MainPage/AccountSetting/ChangeUsername": {
         "component": "index"
+      },
+      "TestPage": {
+        "component": "index"
       }
     },
     "widgets": {}
@@ -93,6 +96,9 @@
       },
       "MainPage/AccountSetting/ChangeUsername": {
         "titleBarText": "更改用户名"
+      },
+      "TestPage": {
+        "titleBarText": "测试页面"
       }
     }
   }

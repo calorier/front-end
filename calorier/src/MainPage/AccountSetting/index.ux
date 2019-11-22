@@ -1,7 +1,10 @@
-<import name="line-box" src="../../CommonComponent/line_box"></import>
+<import name="line-box" src="../../Components/line_box"></import>
 
 <template>
     <div class="page">
+        <div class="avatar">
+            <image src="{{avatarSrc}}"></image>
+        </div>
         <line-box for="{{lineList}}" list="{{$item}}" onclick-item="clickLineListItem"></line-box>
     </div>
 </template>
@@ -11,6 +14,13 @@
 .page {
   justify-content: flex-start;
 }
+
+.avatar {
+    margin: 75px;
+    width: 250px;
+    height: 250px;
+}
+
 </style>
 <script>
 import router from '@system.router'
@@ -18,7 +28,8 @@ import router from '@system.router'
 export default {
     protected: {
         username: '',
-        email: ''
+        email: '',
+        avatarSrc: '../../Common/logo.png'
     },
     private: {
         lineList: [

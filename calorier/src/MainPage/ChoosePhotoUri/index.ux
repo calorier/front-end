@@ -1,7 +1,9 @@
+<import name="btn" src="../../Components/btn"></import>
+ 
 <template>
     <div class="page">
         <input id="photoUri" type="text" class="large-text-box line-text-box" placeholder="请将图片网址粘贴到此" onchange="setphotoUri" onenterkeyclick="OK" value="{{photoUri}}"></input>
-        <input type="button" class="large-btn green-btn" value="确认" onclick="OK"></input>
+        <btn btn-type="primary" title="确认" onclick-btn="OK"></btn>
     </div>
 </template>
 <style>

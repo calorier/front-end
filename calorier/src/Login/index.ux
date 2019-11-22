@@ -1,4 +1,4 @@
-<import name="btn" src="../CommonComponent/btn"></import>
+<import name="btn" src="../Components/btn"></import>
  
 
 <template>

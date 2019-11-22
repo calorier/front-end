@@ -1,6 +1,5 @@
-<import name="area_text_box" src="../../../CommonComponent/area_text_box"></import>
-
-<import name="btn" src="../../../CommonComponent/btn"></import>
+<import name="area_text_box" src="../../../Components/area_text_box"></import>
+<import name="btn" src="../../../Components/btn"></import>
 
 <template>
     <div class="page">
@@ -15,6 +14,7 @@
   justify-content: flex-start;
   background-color: #f8f8ff;
 }
+
 </style>
 <script>
 export default {

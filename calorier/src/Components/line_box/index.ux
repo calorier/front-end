@@ -76,7 +76,7 @@ export default {
   margin-top: 15px;
   background-color: #fff;
   padding-left: 30px;
-  padding-right: 0;
+  padding-right: 30px;
   justify-content: space-between;
 }
 </style>
