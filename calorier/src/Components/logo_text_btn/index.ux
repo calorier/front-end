@@ -1,0 +1,98 @@
+<!-- 按钮 -->
+
+<template>
+    <div class="container {{size}} {{type}}" onclick="clickBtn">
+        <image class="img {{icon}}" if="{{showIcon}}"></image>
+        <text class="title">{{text}}</text>
+    </div>
+</template>
+
+<script>
+export default {
+    props: {
+        size: {
+            type: String,
+            default: 'middle'
+        },
+        icon: {
+            type: String,
+            default: 'none'
+        },
+        text: {
+            type: String,
+        },
+        type: {
+            type: String,
+            default: ''
+        },
+        showIcon: {
+            type: Boolean,
+            default: true
+        }
+    },
+    clickBtn() {
+        this.$emit('clickBtn')
+    }
+}
+</script>
+
+<style>
+.container {
+  flex-direction: row;
+  align-items:center;
+  height: 86px;
+  font-size: 36px;
+  padding: 18px 0;
+}
+
+.long {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.middle {
+  width: 50%;
+  justify-content: flex-start;;
+}
+
+.short {
+  width: 33%;
+  justify-content: flex-start;
+}
+
+.img {
+  width: 50px;
+  height: 50px;
+  margin: 0 10px;
+}
+
+.display {
+  background-image: url("../../../Common/images/icon-display.png");
+}
+
+.sort {
+  background-image: url("../../../Common/images/icon-sort.png");
+}
+
+.date {
+  background-image: url("../../../Common/images/icon-date.png");
+}
+
+.choose {
+  background-image: url("../../../Common/images/icon-choose.png");
+}
+
+.title {
+  height: 50px;
+  margin: 0 10px;
+}
+
+.border {
+  border: 2px solid #a9a9a9;
+  border-radius: 2px;
+}
+
+.line {
+  border-bottom: 2px solid darkgray;
+}
+</style>

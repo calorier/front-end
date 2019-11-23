@@ -1,11 +1,11 @@
 <import name="line-box" src="../Components/line_box"></import>
 <import name="btn" src="../Components/btn"></import>
-<import name="search-box" src="../Components/search_box"></import>
+<import name="record-list" src="../Components/record_list"></import>
  
  
 <template>
   <div class="page">
-    <tabs class="tabs" index="1" onchange="changeTabactive">
+    <tabs class="tabs" index="0" onchange="changeTabactive">
       <!-- 底部导航区 -->
       <tab-bar class="tab-bar" mode="fixed">
         <text class="tab-bar-text {{tabIndex === 0 ? 'tab-active' : 'tab-common' }}">记录</text>
@@ -15,14 +15,16 @@
       <tab-content class="tab-content" scrollable="{{scrollable}}">
         <!-- 记录界面 -->
         <div class="tab-container">
-          <search-box type="border" onsearch="searchRecord" oninput="inputSearchText"></search-box>
+          <record-list date-rule="{{record.dateRule}}" sort-rule="{{record.sortRule}}" onchoose-date="chooseRecordDate" onsort="sortRecord">
+          </record-list>
         </div>
+        <!-- 开始界面 -->
         <div id="start-tab" class="tab-container">
           <div class="start-tab-title">
-            <text>{{isGetPhoto ? '准备上传' : '开始识别'}}</text>
+            <text>{{isShowPhoto ? '准备上传' : '开始识别'}}</text>
           </div>
           <!-- 识别方式按钮组 -->
-          <div class="discern-buttons" if="!isGetPhoto">
+          <div class="discern-buttons" if="!isShowPhoto">
             <!-- 拍摄识别 -->
             <div class="discern-button" onclick="discernTakePhoto">
               <image class="discern-icon" src="{{actBtns[0].icon}}"></image>
@@ -40,7 +42,7 @@
             </div>
           </div>
           <!-- 选择图片后显示此界面 -->
-          <div class="choosed-photo" if="isGetPhoto">
+          <div class="choosed-photo" if="isShowPhoto">
             <!-- 已选择的图片预览 -->
             <image class="preview-photo" src="{{choosedPhoto}}"></image>
             <!-- 操作 -->
@@ -56,6 +58,7 @@
     </tabs>
   </div>
 </template>
+
 <script>
 import prompt from '@system.prompt'
 import media from '@system.media'
@@ -73,7 +76,6 @@ export default {
   },
   private: {
     title: ['识别记录', '开始', '设置'],
-
     scrollable: true,
     tabIndex: 1,
     actBtns: [
@@ -81,7 +83,7 @@ export default {
       { icon: "../Common/images/icon-local-photo.png", name: "本地图片识别" },
       { icon: "../Common/images/icon-web-photo.png", name: "网络图片识别" }
     ],
-    isGetPhoto: false,
+    isShowPhoto: false,
     lineList: [
       [
         { title: '账户设置', remark: '', showLinkIcon: true, id: 'account-setting' },
@@ -92,7 +94,11 @@ export default {
         { title: '退出', remark: '', warning: true, id: 'exit' }
       ]
     ],
-    searchTextOfRecord: ''
+    searchTextOfRecord: '',
+    record: {
+      dateRule: '最近一个月',
+      sortRule: '日期从晚到早'
+    }
   },
   changeTabactive(e) {
     this.tabIndex = e.index
@@ -105,7 +111,7 @@ export default {
     let _this = this
     media.takePhoto({
       success: function (data) {
-        _this.isGetPhoto = true
+        _this.isShowPhoto = true
         _this.choosedPhoto = data.uri
         //TODO: 将照片发送到服务器上
       },
@@ -119,7 +125,7 @@ export default {
     media.pickImage({
       success: function (data) {
         console.log(data.uri)
-        _this.isGetPhoto = true
+        _this.isShowPhoto = true
         _this.choosedPhoto = data.uri
         //TODO: 将照片发送到服务器上
       },
@@ -138,7 +144,7 @@ export default {
   },
   rechoose() {
     this.choosedPhoto = ''
-    this.isGetPhoto = false
+    this.isShowPhoto = false
   },
   clickSettingListItem(e) {
     let _this = this
@@ -147,7 +153,7 @@ export default {
 
         router.push({
           uri: 'MainPage/AccountSetting',
-          params: { username: _this.username, email: _this.email , phone : this.phone ,avatar : this.avatar}
+          params: { username: _this.username, email: _this.email, phone: this.phone, avatar: this.avatar }
         })
         break;
       case 'notice':
@@ -187,14 +193,46 @@ export default {
   },
   inputSearchText(e) {
     this.searchTextOfRecord = e.detail.value
+  },
+  chooseRecordDate(e) {
+    let itemList = [
+      '最近一周',
+      '最近一个月',
+      '最近半年',
+      '最近一年',
+      '全部'
+    ]
+    let _this = this
+    prompt.showContextMenu({
+      itemList: itemList,
+      success: function (data) {
+        _this.record.dateRule = itemList[data.index]
+        //TODO: 重新请求服务器获取规定日期限的数据
+      }
+    })
+  },
+  sortRecord(e) {
+    let itemList = [
+      '日期从早到晚',
+      '日期从晚到早',
+      '食物名称',
+      'Calorie值从大到小',
+      'Calorie值从小到大'
+    ]
+    let _this = this
+    prompt.showContextMenu({
+      itemList: itemList,
+      success: function (data) {
+        _this.record.sortRule = itemList[data.index]
+        //TODO:重新请求服务器获取排序后的数据
+      }
+    })
   }
 }
 </script>
 
 <style>
 @import "../Common/css/main.css";
-
-
 
 .page {
   padding-bottom: 75px;

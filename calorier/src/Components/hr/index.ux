@@ -1,0 +1,51 @@
+<template>
+    <div class="container {{color}} {{width}}"></div>
+</template>
+
+<style>
+.container {
+  width: 100%;
+  border-style: solid;
+}
+
+.bold {
+  border-bottom-width: 10px;
+}
+
+.normal {
+  border-bottom-width: 5px;
+}
+
+.thin {
+  border-bottom-width: 2px;
+}
+
+.green {
+  border-color: green;
+}
+
+.red {
+  border-color: red;
+}
+
+.orange {
+  border-color: orange;
+}
+
+.blue {
+  border-color: blue;
+}
+
+.gray {
+  border-color: darkgray;
+}
+</style>
+
+<script>
+export default {
+    props: {
+        color: { type: String, default: 'gray' },
+        width: { type: String, default: 'thin' }
+    }
+}
+</script>

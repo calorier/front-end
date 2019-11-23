@@ -18,14 +18,18 @@ export default {
         showText: {
             type: Boolean,
             default: false
+        },
+        value: {
+            type: String,
+            default: ''
         }
     },
     search() {
         this.$emit('search')
     },
     input(e) {
-        // console.log(e)
-        this.$emit('input',{value : e.value})
+        this.value = e.value
+        // this.$emit('input',{data : e.value})
     }
 }
 </script>

@@ -1,0 +1,58 @@
+<import name="logo-text-btn" src="../logo_text_btn"></import>
+<import name="search-box" src="../search_box"></import>
+<import name="hr" src="../hr"></import>
+ 
+
+<template>
+    <div class="container">
+        <search-box type="border" onsearch="search" value="{{searchText}}" if="readyToSearch"></search-box>
+        <div class="query-btn">
+            <logo-text-btn type="none" text="{{dateRule}}" icon="date" size="middle" onclick-btn="chooseDate"></logo-text-btn>
+            <logo-text-btn type="none" text="{{sortRule}}" icon="sort" size="middle" onclick-btn="sort"></logo-text-btn>
+        </div>
+        <hr/>
+    </div>
+    
+</template>
+
+<script>
+import prompt from '@system.prompt'
+
+export default {
+    props: {
+        searchText: { type: String, default: '' },
+        dateRule: { type: String, default: '最近一个月' },
+        sortRule: { type: String, default: '日期从晚到早' },
+        readyToSearch: {type: Boolean, default: false}
+    },
+    data: {
+    },
+    inputSearchText(e) {
+        this.searchText = e.detail.value
+    },
+    search(e) {
+        //TODO: 像服务器发起搜索数据请求
+        this.$emit('search', { data: this.searchText })
+    },
+    chooseDate() {
+        this.$emit('chooseDate')
+    },
+    sort() {
+        this.$emit('sort')
+    }
+}
+</script>
+
+<style>
+.container {
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.query-btn {
+  margin: 10px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>
