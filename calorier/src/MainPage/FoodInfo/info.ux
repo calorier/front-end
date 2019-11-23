@@ -1,0 +1,34 @@
+<template>
+    <div class="container">
+        <text class="title">{{title}}</text>
+        <text class="content">{{content}}</text>
+    </div>
+</template>
+
+<script>
+export default {
+    props: {
+        title: String,
+        content: String
+    }
+}
+</script>
+<style>
+.container {
+  flex-direction: row;
+  height: 86px;
+  margin: 18px 18px;
+}
+
+.title {
+  width: 25%;
+  color: #000000;
+  font-size: 36px;
+}
+
+.content {
+  width: 75%;
+  padding: 10px;
+  font-size: 32px;
+}
+</style>

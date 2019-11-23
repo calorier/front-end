@@ -1,0 +1,92 @@
+<import name="vr" src="../../../../Components/vr"></import>
+ 
+<template>
+    <div class="container" onclick="show">
+        <div class="main">
+            <div class="left">
+                <image src="{{link}}"></image>
+            </div>
+            <div class="middle">
+                <text class="calorie">Calorie: {{calorie}} g</text>
+                <text class="food">{{food}}</text>
+                <text class="date">{{time}}</text>
+            </div>
+        </div>
+        <vr />
+        <div class="right">
+            <image src="icon-right-point.png"></image>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    props: {
+        link: { type: String, default: './pic-failedload.png' },
+        calorie: Number,
+        food: String,
+        time: String,
+        id: Number
+    },
+    show() {
+        this.$emit('show', { data: this.id })
+    }
+}
+</script>
+
+<style>
+.container {
+  width: 100%;
+  border: 2px solid #a9a9a9;
+  margin: 10px 0;
+  padding: 10px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.right {
+  width: 75px;
+  height: 75px;
+}
+
+.middle {
+  height: 250px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 15px;
+}
+
+.left {
+  width: 250px;
+  height: 250px;
+  padding: 15px;
+}
+
+.center {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.calorie {
+  color: #000000;
+  font-size: 32px;
+}
+
+.date {
+  font-size: 24px;
+  color: #a9a9a9;
+}
+
+.food {
+  font-size: 40px;
+  color: #000000;
+}
+
+.main {
+  flex-direction: row;
+  justify-content: flex-start;
+}
+</style>

@@ -1,6 +1,7 @@
-<import name="logo-text-btn" src="../logo_text_btn"></import>
-<import name="search-box" src="../search_box"></import>
-<import name="hr" src="../hr"></import>
+<import name="logo-text-btn" src="../../Components/logo_text_btn"></import>
+<import name="search-box" src="../../Components/search_box"></import>
+<import name="hr" src="../../Components/hr"></import>
+<import name="record-items" src="./record_items"></import>
  
 
 <template>
@@ -11,6 +12,7 @@
             <logo-text-btn type="none" text="{{sortRule}}" icon="sort" size="middle" onclick-btn="sort"></logo-text-btn>
         </div>
         <hr/>
+        <record-items list="{{record}}"></record-items>
     </div>
     
 </template>
@@ -23,7 +25,8 @@ export default {
         searchText: { type: String, default: '' },
         dateRule: { type: String, default: '最近一个月' },
         sortRule: { type: String, default: '日期从晚到早' },
-        readyToSearch: {type: Boolean, default: false}
+        readyToSearch: {type: Boolean, default: false},
+        record: Array
     },
     data: {
     },

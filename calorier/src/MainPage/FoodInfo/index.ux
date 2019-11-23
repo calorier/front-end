@@ -1,0 +1,56 @@
+<import name="info" src="./info.ux"></import>
+<import name="hr" src="../../Components/hr"></import>
+  
+<template>
+    <div class="page" onclick="debug">
+        <div class="photo">
+            <image src="{{link}}"></image>
+        </div>
+        <div class="info">
+            <info title="名称" content="{{name}}" />
+            <hr width="very-thin" />
+            <info title="能量/g" content="{{calorie}}" />
+            <hr width="very-thin" />
+            <info title="描述" content="{{information}}" />
+            <hr width="very-thin" />
+            <info title="原料" content="{{ingredient}}" />
+            <hr width="very-thin" />
+        </div>
+    </div>
+</template>
+<style>
+@import "../../Common/css/main.css";
+
+.page {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.photo {
+  width: 550px;
+  height: 550px;
+  margin: 75px;
+}
+
+.info {
+  width: 100%;
+  padding: 18px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+</style>
+<script>
+export default {
+    protected: {
+        name: '',
+        calorie: '',
+        information: '',
+        ingredient: '',
+        link: ''
+    },
+    debug() {
+        console.log(this.food)
+    }
+}
+</script>
