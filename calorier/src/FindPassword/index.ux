@@ -10,7 +10,7 @@
         <div class="hint-box">
             <text class="hint">{{hint}}</text>
         </div>
-        <btn btn-type="warning" title="找回密码" onclick-btn="findPassword"></btn>
+        <btn btn-type="warning" title="下一步" onclick-btn="findPassword"></btn>
     </div>
 </template>
 <style>

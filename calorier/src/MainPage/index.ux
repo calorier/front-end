@@ -194,6 +194,8 @@ export default {
 <style>
 @import "../Common/css/main.css";
 
+
+
 .page {
   padding-bottom: 75px;
 }

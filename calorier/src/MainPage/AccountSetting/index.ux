@@ -2,7 +2,7 @@
 
 <template>
     <div class="page">
-        <div class="avatar">
+        <div class="avatar" onclick="clickAvatar">
             <image src="{{avatarSrc}}"></image>
         </div>
         <line-box for="{{lineList}}" list="{{$item}}" onclick-item="clickLineListItem"></line-box>
@@ -16,11 +16,10 @@
 }
 
 .avatar {
-    margin: 75px;
-    width: 250px;
-    height: 250px;
+  margin: 75px;
+  width: 250px;
+  height: 250px;
 }
-
 </style>
 <script>
 import router from '@system.router'
@@ -34,9 +33,10 @@ export default {
     private: {
         lineList: [
             [
-                { title: '用户名', remark: '', id: 'username' },
+                { title: '更改用户名', remark: '', id: 'username' },
                 // {title:'手机号',remark:'',id:'phone'},
-                { title: '邮箱', remark: '', id: 'email' }
+                { title: '更改密码', remark: '', id: 'password' },
+                { title: '更改绑定邮箱', remark: '', id: 'email' }
             ]
         ]
     },
@@ -54,6 +54,10 @@ export default {
             case 'phone':
                 //TODO:修改绑定手机，需邮箱辅助
                 break
+            case 'password':
+                router.push({
+                    uri: '/FindPassword'
+                })
             default:
                 break
         }
@@ -62,6 +66,9 @@ export default {
         //TODO: 初始化用户用户名和邮箱电话号等信息
         this.lineList[0][0].remark = this.username
         this.lineList[0][1].remark = this.email
+    },
+    clickAvatar(){
+        
     }
 }
 

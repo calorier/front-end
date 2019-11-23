@@ -80,7 +80,7 @@
         "titleBarText": "注册账号"
       },
       "FindPassword": {
-        "titleBarText": "找回密码"
+        "titleBarText": "验证邮箱"
       },
       "ResetPassword": {
         "titleBarText": "重置密码"
