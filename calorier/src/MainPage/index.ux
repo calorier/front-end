@@ -147,7 +147,7 @@ export default {
 
         router.push({
           uri: 'MainPage/AccountSetting',
-          params: { username: _this.username, email: _this.email }
+          params: { username: _this.username, email: _this.email , phone : this.phone ,avatar : this.avatar}
         })
         break;
       case 'notice':

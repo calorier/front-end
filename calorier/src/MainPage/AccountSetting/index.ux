@@ -2,8 +2,12 @@
 
 <template>
     <div class="page">
-        <div class="avatar" onclick="clickAvatar">
-            <image src="{{avatarSrc}}"></image>
+        <div class="user-info" onclick="clickAvatar">
+            <image class="avatar" src="{{avatarSrc}}"></image>
+            <div class="title">
+                <text class="username">{{username}}</text>
+                <text class="email">{{email}}</text>
+            </div>
         </div>
         <line-box for="{{lineList}}" list="{{$item}}" onclick-item="clickLineListItem"></line-box>
     </div>
@@ -15,10 +19,27 @@
   justify-content: flex-start;
 }
 
-.avatar {
+.title > text {
+    font-size: 36px;
+}
+
+.title{
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.user-info {
   margin: 75px;
-  width: 250px;
-  height: 250px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar{
+    margin: 75px;
+    width: 250px;
+    height: 250px;
 }
 </style>
 <script>
@@ -26,15 +47,16 @@ import router from '@system.router'
 
 export default {
     protected: {
-        username: '',
-        email: '',
+        username: 'xxxx',
+        email: 'xxx@xxx.xxx',
+        phone: 'xxx-xxxx-xxxx',
         avatarSrc: '../../Common/logo.png'
     },
     private: {
         lineList: [
             [
                 { title: '更改用户名', remark: '', id: 'username' },
-                // {title:'手机号',remark:'',id:'phone'},
+                { title: '更改手机号', remark: '', id: 'phone' },
                 { title: '更改密码', remark: '', id: 'password' },
                 { title: '更改绑定邮箱', remark: '', id: 'email' }
             ]
@@ -65,10 +87,11 @@ export default {
     onInit() {
         //TODO: 初始化用户用户名和邮箱电话号等信息
         this.lineList[0][0].remark = this.username
-        this.lineList[0][1].remark = this.email
+        this.lineList[0][1].remark = this.phone
+        this.lineList[0][3].remark = this.email
     },
-    clickAvatar(){
-        
+    clickAvatar() {
+
     }
 }
 
