@@ -1,3 +1,4 @@
+<!-- 记录列表组件 -->
 <import name="record-item" src="./record_item"></import>
 
 <template>
@@ -14,6 +15,7 @@ export default {
     props: {
         list: Array
     },
+    //查看记录详细信息
     show(e) {
         let food = this.list[e.detail.data].food
         router.push({

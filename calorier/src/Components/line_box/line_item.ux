@@ -1,3 +1,4 @@
+<!-- 线框按钮基组件 -->
 <template>
   <div class="line-item bottom-border" onclick="clickItem(id)">
     <text class="line-title {{warning ? 'line-title-red' : 'line-title-black'}} {{setTextPosition(textPosition)}}">{{title}}</text>

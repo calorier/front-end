@@ -1,9 +1,13 @@
+<!-- 搜索框组件 -->
+
 <template>
     <div class="search {{type}}">
         <div class="search-box">
             <input type="text" placeholder="请输入搜索内容" enterkeytype="搜索" onchange="input" onenterkeyclick="search"></input>
+            <!-- 搜索图标 -->
             <image src="../../Common/images/icon-search-gray.png" onclick="search"></image>
         </div>
+        <!-- 搜索按钮 -->
         <text class="search-text" if="{{showText}}" onclick="search">搜索</text>
     </div>
 </template>
@@ -11,25 +15,29 @@
 <script>
 export default {
     props: {
+        //搜索框类型 [border|line]
         type: {
             type: String,
             default: 'border'
         },
+        //是否展示搜索按钮
         showText: {
             type: Boolean,
             default: false
         },
+        // 搜索框的输入内容
         value: {
             type: String,
             default: ''
         }
     },
+    //搜索事件
     search() {
         this.$emit('search')
     },
+    //输入事件
     input(e) {
         this.value = e.value
-        // this.$emit('input',{data : e.value})
     }
 }
 </script>
@@ -45,12 +53,12 @@ export default {
 }
 
 .line {
-    border-bottom: 2px solid #a9a9a9;
+  border-bottom: 2px solid #a9a9a9;
 }
 
-.border{
-    border: 2px solid #a9a9a9;
-    border-radius: 2px;
+.border {
+  border: 2px solid #a9a9a9;
+  border-radius: 2px;
 }
 
 .search-box > image {
@@ -74,8 +82,6 @@ export default {
   flex: 0;
   height: 50px;
 }
-
-
 </style>
 
 

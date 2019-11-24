@@ -1,3 +1,4 @@
+<!-- 记录页面组件 -->
 <import name="logo-text-btn" src="../../Components/logo_text_btn"></import>
 <import name="search-box" src="../../Components/search_box"></import>
 <import name="hr" src="../../Components/hr"></import>
@@ -6,12 +7,16 @@
 
 <template>
     <div class="container">
+        <!-- 搜索框 -->
         <search-box type="border" onsearch="search" value="{{searchText}}" if="readyToSearch"></search-box>
+        <!-- 过滤条件按钮 -->
         <div class="query-btn">
             <logo-text-btn type="none" text="{{dateRule}}" icon="date" size="middle" onclick-btn="chooseDate"></logo-text-btn>
             <logo-text-btn type="none" text="{{sortRule}}" icon="sort" size="middle" onclick-btn="sort"></logo-text-btn>
         </div>
-        <hr/>
+        <!-- 水平分割线 -->
+        <hr></hr>
+        <!-- 记录列表 -->
         <record-items list="{{record}}"></record-items>
     </div>
     

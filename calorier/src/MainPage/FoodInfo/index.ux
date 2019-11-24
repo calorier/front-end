@@ -1,20 +1,28 @@
+<!-- 食物详细信息页面 -->
 <import name="info" src="./info.ux"></import>
 <import name="hr" src="../../Components/hr"></import>
   
 <template>
-    <div class="page" onclick="debug">
+    <div class="page">
+        <!-- 图片 -->
         <div class="photo">
             <image src="{{link}}"></image>
         </div>
+        <!-- 信息 -->
         <div class="info">
-            <info title="名称" content="{{name}}" />
-            <hr width="very-thin" />
-            <info title="能量/g" content="{{calorie}}" />
-            <hr width="very-thin" />
-            <info title="描述" content="{{information}}" />
-            <hr width="very-thin" />
-            <info title="原料" content="{{ingredient}}" />
-            <hr width="very-thin" />
+            <info title="名称" content="{{name}}"></info>
+            <hr width="very-thin">
+            </hr>
+            <info title="能量/g" content="{{calorie}}"></info>
+            </hr>
+            <hr width="very-thin">
+            </hr>
+            <info title="描述" content="{{information}}"></info>
+            <hr width="very-thin">
+            </hr>
+            <info title="原料" content="{{ingredient}}"></info>
+            <hr width="very-thin">
+            </hr>
         </div>
     </div>
 </template>
@@ -48,9 +56,6 @@ export default {
         information: '',
         ingredient: '',
         link: ''
-    },
-    debug() {
-        console.log(this.food)
     }
 }
 </script>

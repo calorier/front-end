@@ -1,36 +1,44 @@
+<!-- 记录基组件 -->
 <import name="vr" src="../../../../Components/vr"></import>
  
 <template>
-    <div class="container" onclick="show">
-        <div class="main">
-            <div class="left">
-                <image src="{{link}}"></image>
-            </div>
-            <div class="middle">
-                <text class="calorie">Calorie: {{calorie}} g</text>
-                <text class="food">{{food}}</text>
-                <text class="date">{{time}}</text>
-            </div>
-        </div>
-        <vr />
-        <div class="right">
-            <image src="icon-right-point.png"></image>
-        </div>
+  <div class="container" onclick="show">
+    <!-- 主要信息 -->
+    <div class="main">
+      <!-- 食物图片 -->
+      <div class="left">
+        <image src="{{link}}"></image>
+      </div>
+      <!-- 主内容 -->
+      <div class="middle">
+        <!-- 热量值 -->
+        <text class="calorie">Calorie: {{calorie}} g</text>
+        <!-- 食物名 -->
+        <text class="food">{{food}}</text>
+        <!-- 记录创建时间 -->
+        <text class="date">{{time}}</text>
+      </div>
     </div>
+    <!-- 垂直分割线 -->
+    <vr></vr>
+    <div class="right">
+      <image src="icon-right-point.png"></image>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-    props: {
-        link: { type: String, default: './pic-failedload.png' },
-        calorie: Number,
-        food: String,
-        time: String,
-        id: Number
-    },
-    show() {
-        this.$emit('show', { data: this.id })
-    }
+  props: {
+    link: { type: String, default: './pic-failedload.png' },
+    calorie: Number,
+    food: String,
+    time: String,
+    id: Number
+  },
+  show() {
+    this.$emit('show', { data: this.id })
+  }
 }
 </script>
 

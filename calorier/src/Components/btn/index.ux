@@ -1,30 +1,4 @@
-<!-- demo -->
-<!-- 
-<import name="btn" src="../components/btn.ux"></import>
-<template>
-  <div class="demo-page">
-    <btn btn-type="primary" title="primary" onclick-btn="clickBtn(0)"></btn>
-    <btn btn-type="warning" title="warning" onclick-btn="clickBtn(1)"></btn>
-    <btn btn-type="danger" title="danger" onclick-btn="clickBtn(2)"></btn>
-  </div>
-</template>
-<script>
-export default {
-  clickBtn(id) {
-    console.log(id)
-  }
-}
-</script>
-
-<style>
-.demo-page {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-</style>
- -->
-
+<!-- 基本按钮组件 -->
 <template>
   <input type="button" class="btn {{btnType}}" value="{{title}}" onclick="clickBtn" />
 </template>

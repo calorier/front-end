@@ -1,6 +1,9 @@
+<!-- 食物单条信息组件 -->
 <template>
     <div class="container">
+        <!-- 信息名称 -->
         <text class="title">{{title}}</text>
+        <!-- 信息内容 -->
         <text class="content">{{content}}</text>
     </div>
 </template>
@@ -8,8 +11,8 @@
 <script>
 export default {
     props: {
-        title: String,
-        content: String
+        title: String,//名称属性
+        content: String//内容属性
     }
 }
 </script>

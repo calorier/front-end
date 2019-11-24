@@ -1,3 +1,4 @@
+<!-- 应用主界面 -->
 <import name="line-box" src="../Components/line_box"></import>
 <import name="btn" src="../Components/btn"></import>
 <import name="record-list" src="./record_list"></import>
@@ -45,13 +46,14 @@
           <div class="choosed-photo" if="isShowPhoto">
             <!-- 已选择的图片预览 -->
             <image class="preview-photo" src="{{choosedPhoto}}"></image>
-            <!-- 操作 -->
+            <!-- 选择图片后的操作 -->
             <btn btn-type="primary" title="开始识别" onclick-btn="startDiscern"></btn>
             <btn btn-type="warning" title="重新选择" onclick-btn="rechoose"></btn>
           </div>
         </div>
         <!-- 设置界面 -->
         <div id="setting" class="tab-container">
+          <!-- 设置界面的线条按钮列表 -->
           <line-box for="{{lineList}}" list="{{$item}}" onclick-item="clickSettingListItem"></line-box>
         </div>
       </tab-content>

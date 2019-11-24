@@ -1,7 +1,5 @@
 <!-- 竖直分割线 -->
 
-<!-- 水平分割线 -->
-
 <template>
     <div class="container {{color}} {{width}}"></div>
 </template>
@@ -13,15 +11,19 @@
 }
 
 .bold {
-  border-bottom-width: 10px;
+  border-left-width: 10px;
 }
 
 .normal {
-  border-bottom-width: 5px;
+  border-left-width: 5px;
 }
 
 .thin {
-  border-bottom-width: 2px;
+  border-left-width: 2px;
+}
+
+.very-thin{
+  border-left-width: 1px;
 }
 
 .green {

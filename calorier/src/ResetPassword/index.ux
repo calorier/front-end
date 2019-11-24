@@ -1,3 +1,4 @@
+<!-- 重置密码界面 -->
 <import name="btn" src="../Components/btn"></import>
  
 <template>

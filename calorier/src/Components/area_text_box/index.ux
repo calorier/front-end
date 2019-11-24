@@ -1,9 +1,13 @@
+<!-- 指定内容长度输入框组件 -->
 <template>
   <div class="component">
     <div class="box">
+      <!-- 输入框 -->
       <input type="text" class="text" value="{{data}}" onchange="inputData" />
+      <!-- 清空文本图标 -->
       <image src="./icon-clear-text.png" onclick="clearText"></image>
     </div>
+    <!-- 内容长度提示 -->
     <text class="label {{data.length > length ? 'warning' : '' }}">{{data.length}} / {{length}}</text>
   </div>
 </template>
@@ -11,20 +15,24 @@
 <script>
 export default {
   props: {
+    //输入框已输入的内容
     data: {
       type: String,
       default: ''
     },
+    //输入框默认内容最大长度
     length: {
       type: Number,
-      default: 100
+      default: 12
     }
   },
   data: {
   },
+  //输入数据事件
   inputData(e) {
     this.$emit('inputData', { data: e.value })
   },
+  //清空文本事件
   clearText() {
     console.log('clear')
     this.$emit('clearText', { data: '' })

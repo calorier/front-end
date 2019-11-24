@@ -1,18 +1,23 @@
+<!-- 注册账号界面 -->
 <import name="btn" src="../Components/btn"></import>
  
 <template>
     <div class="page">
+        <!-- 主输入框 -->
         <input class="large-text-box line-text-box" type="text" placeholder="请输入用户名" value="{{username}}" onchange="setUsername"></input>
         <input class="large-text-box line-text-box" type="password" placeholder="请输入密码" value="{{password}}" onchange="setPassword"></input>
         <input class="large-text-box line-text-box" type="password" placeholder="请再次确认密码" value="{{repeatPassword}}" onchange="setRepeatPassword"></input>
         <input class="large-text-box line-text-box" type="email" placeholder="请输入绑定邮箱" value='{{email}}' onchange="setEmail"></input>
+        <!-- 验证码 -->
         <div class="verify-code">
             <input class="small-text-box line-text-box" type="text" placeholder="请输入邮箱验证码" value="{{verifyCode}}" onchange="setVerifyCode"></input>
             <input class="small-btn orange-btn" type="button" value="{{verifyBtn}}"></input>
         </div>
+        <!-- 错误信息 -->
         <div class="hint-box">
             <text class="hint">{{hint}}</text>
         </div>
+        <!-- 注册按钮 -->
         <btn btn-type="warning" title="注册" onclick-btn="signIn"></btn>
     </div>
 </template>

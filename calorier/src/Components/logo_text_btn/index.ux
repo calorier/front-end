@@ -1,8 +1,10 @@
-<!-- 按钮 -->
+<!-- 带有logo的按钮组件 -->
 
 <template>
     <div class="container {{size}} {{type}}" onclick="clickBtn">
+        <!-- 按钮图标 -->
         <image class="img {{icon}}" if="{{showIcon}}"></image>
+        <!-- 按钮名称 -->
         <text class="title">{{text}}</text>
     </div>
 </template>
@@ -10,26 +12,32 @@
 <script>
 export default {
     props: {
+        // 按钮大小属性[long|middle|short]
         size: {
             type: String,
             default: 'middle'
         },
+        //图标路径url
         icon: {
             type: String,
             default: 'none'
         },
+        //按钮文本
         text: {
             type: String,
         },
+        //按钮类型（因本地文件不易加载暂时使用type属性类确定图标样式）
         type: {
             type: String,
             default: ''
         },
+        //是否显示按钮图标
         showIcon: {
             type: Boolean,
             default: true
         }
     },
+    //点击按钮事件
     clickBtn() {
         this.$emit('clickBtn')
     }

@@ -1,45 +1,4 @@
-<!-- demo -->
-<!-- 
-<import name="line-box" src="../components/line_box"></import>
-
-<template>
-  <div class="demo-page">
-    <line-box for="{{lineList}}" list="{{$item}}" onclick-item="clickItem"></line-box>
-  </div>
-</template>
-
-<script>
-
-export default {
-  private: {
-    lineList: [
-      [
-        { title: '消息', remark: '', id: 0 },
-        { title: '通知', remark: '', id: 1 }
-      ],
-      [
-        { title: '我的钱包', remark: '手机充值', id: 2 },
-        { title: '用户反馈', remark: '', id: 3 }
-      ]
-    ]
-  },
-  clickItem(e) {
-    console.log(e.detail.id)
-  }
-}
-</script>
-
-<style>
-.demo-page {
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #f4f5f7;
-}
-</style>
- -->
-
-
+<!-- 线框按钮组件 -->
 <import name="line-item" src="./line_item.ux"></import>
 
 <template>
