@@ -9,6 +9,8 @@
       <div class="left">
         <image src="{{link}}"></image>
       </div>
+      <!-- 垂直分割线 -->
+      <vr></vr>
       <!-- 主内容 -->
       <div class="middle">
         <!-- 热量值 -->
@@ -19,8 +21,7 @@
         <text class="date">{{time}}</text>
       </div>
     </div>
-    <!-- 垂直分割线 -->
-    <vr></vr>
+
     <div class="right">
       <image src="icon-right-point.png"></image>
     </div>

@@ -3,16 +3,16 @@
 <template>
     <div class="container {{size}} {{type}}" onclick="clickBtn">
         <!-- 按钮图标 -->
-        <image class="img {{icon}}" if="{{showIcon}}"></image>
+        <image class="img" src="{{'http://i.caigoubao.cc/150_627095/calorier/' + icon}}" if="{{showIcon}}"></image>
         <!-- 按钮名称 -->
-        <text class="title">{{text}}</text>
+        <text class="title" if="{{showText}}">{{text}}</text>
     </div>
 </template>
 
 <script>
 export default {
     props: {
-        // 按钮大小属性[long|middle|short]
+        // 按钮大小属性[long|middle|short|min]
         size: {
             type: String,
             default: 'middle'
@@ -20,21 +20,21 @@ export default {
         //图标路径url
         icon: {
             type: String,
-            default: 'none'
+            default: ''
         },
         //按钮文本
         text: {
             type: String,
         },
-        //按钮类型（因本地文件不易加载暂时使用type属性类确定图标样式）
-        type: {
-            type: String,
-            default: ''
-        },
         //是否显示按钮图标
         showIcon: {
             type: Boolean,
             default: true
+        },
+        //是否显示文本
+        showText: {
+          type: Boolean,
+          default: true
         }
     },
     //点击按钮事件
@@ -68,26 +68,15 @@ export default {
   justify-content: flex-start;
 }
 
+.min{
+  width: 86px;
+  justify-content: center;
+}
+
 .img {
   width: 50px;
   height: 50px;
   margin: 0 10px;
-}
-
-.display {
-  background-image: url("../../../Common/images/icon-display.png");
-}
-
-.sort {
-  background-image: url("../../../Common/images/icon-sort.png");
-}
-
-.date {
-  background-image: url("../../../Common/images/icon-date.png");
-}
-
-.choose {
-  background-image: url("../../../Common/images/icon-choose.png");
 }
 
 .title {
