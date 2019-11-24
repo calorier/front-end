@@ -20,6 +20,9 @@
     },
     {
       "name": "system.media"
+    },
+    {
+      "name": "system.fetch"
     }
   ],
   "permissions": [
@@ -30,7 +33,8 @@
   "config": {
     "logLevel": "debug",
     "data": {
-      "choosedPhoto": ""
+      "choosedPhoto": "",
+      "token": ""
     }
   },
   "router": {
