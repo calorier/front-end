@@ -213,10 +213,25 @@ export default {
         logout()
         break;
       case 'exit':
-        this.$app.exit()
+        exit()
         break;
       default:
         break;
+    }
+
+    function exit() {
+      prompt.showDialog({
+        title: '警告',
+        message: '您确认要退出快应用吗？',
+        buttons: [
+          { text: '确认', color: 'green' },
+          { text: '取消', color: 'darkgray' }
+        ],
+        success: function (data) {
+          if (data.index === 0)
+            _this.$app.exit()
+        }
+      })
     }
 
     function logout() {
