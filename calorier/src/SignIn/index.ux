@@ -18,7 +18,7 @@
             <text class="hint">{{hint}}</text>
         </div>
         <!-- 注册按钮 -->
-        <btn btn-type="warning" title="注册" onclick-btn="signIn"></btn>
+        <btn btn-type="warning" title="注册并登录" onclick-btn="signIn"></btn>
     </div>
 </template>
 <style>

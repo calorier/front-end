@@ -14,7 +14,6 @@
             <hr width="very-thin">
             </hr>
             <info title="能量/g" content="{{calorie}}"></info>
-            </hr>
             <hr width="very-thin">
             </hr>
             <info title="描述" content="{{information}}"></info>
