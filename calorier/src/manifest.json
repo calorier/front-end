@@ -23,6 +23,9 @@
     },
     {
       "name": "system.fetch"
+    },
+    {
+      "name": "system.webview"
     }
   ],
   "permissions": [
@@ -64,7 +67,7 @@
       "MainPage/AccountSetting/ChangeUsername": {
         "component": "index"
       },
-      "TestPage": {
+      "T": {
         "component": "index"
       },
       "MainPage/FoodInfo": {
@@ -103,7 +106,7 @@
       "MainPage/AccountSetting/ChangeUsername": {
         "titleBarText": "更改用户名"
       },
-      "TestPage": {
+      "T": {
         "titleBarText": "测试页面"
       },
       "MainPage/FoodInfo": {

@@ -13,6 +13,7 @@
             <logo-text-btn text="{{dateRule}}" icon="icon-date.png" size="middle" onclick-btn="chooseDate"></logo-text-btn>
             <logo-text-btn text="{{sortRule}}" icon="icon-sort.png" size="middle" onclick-btn="sort"></logo-text-btn>
             <logo-text-btn text="" icon="{{!readyToSearch ? 'icon-left-point.png' : 'icon-down-point.png' }}" show-text="{{false}}" size="min" onclick-btn="showSearch"></logo-text-btn>
+            <!-- <logo-text-btn text="识别数据统计" show-icon="{{false}}" size="long" onclick-btn="showCharts"></logo-text-btn> -->
         </div>
         <!-- 搜索框 -->
         <search-box type="border" onsearch="search" value="{{searchText}}" if="readyToSearch"></search-box>
@@ -56,6 +57,9 @@ export default {
     },
     showSearch() {
         this.$emit('showSearch')
+    },
+    showCharts(){
+        this.$emit('showCharts')
     }
 }
 </script>

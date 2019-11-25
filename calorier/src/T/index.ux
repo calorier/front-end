@@ -1,0 +1,20 @@
+<import name="btn" src="../Components/btn"></import>
+
+<template>
+  <div class="page">
+    <btn onclick-btn="go"></btn>
+  </div>
+</template>
+<script>
+import webview from '@system.webview'
+export default {
+  go(){
+    webview.loadUrl({
+      url: 'http://www.92yan.online:8080/'
+    })
+  }
+}
+</script>
+<style>
+  @import '../Common/css/main.css';
+</style>
