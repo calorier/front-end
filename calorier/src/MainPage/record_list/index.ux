@@ -9,9 +9,9 @@
     <div class="container">
         <!-- 过滤条件按钮 -->
         <div class="query-btn">
-            <logo-text-btn type="none" text="{{dateRule}}" icon="icon-date.png" size="middle" onclick-btn="chooseDate"></logo-text-btn>
-            <logo-text-btn type="none" text="{{sortRule}}" icon="icon-sort.png" size="middle" onclick-btn="sort"></logo-text-btn>
-            <logo-text-btn type="none" text="" icon="{{!readyToSearch ? 'icon-left-point.png' : 'icon-down-point.png' }}" show-text="false" size="min" onclick-btn="showSearch"></logo-text-btn>
+            <logo-text-btn text="{{dateRule}}" icon="icon-date.png" size="middle" onclick-btn="chooseDate"></logo-text-btn>
+            <logo-text-btn text="{{sortRule}}" icon="icon-sort.png" size="middle" onclick-btn="sort"></logo-text-btn>
+            <logo-text-btn text="" icon="{{!readyToSearch ? 'icon-left-point.png' : 'icon-down-point.png' }}" show-text="false" size="min" onclick-btn="showSearch"></logo-text-btn>
         </div>
         <!-- 搜索框 -->
         <search-box type="border" onsearch="search" value="{{searchText}}" if="readyToSearch"></search-box>
