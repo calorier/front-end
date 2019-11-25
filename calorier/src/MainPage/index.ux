@@ -36,11 +36,11 @@
               <image class="discern-icon" src="{{actBtns[1].icon}}"></image>
               <text class="discern-text">{{actBtns[1].name}}</text>
             </div>
-            <!-- 网络识别 -->
+            <!-- 网络识别
             <div class="discern-button" onclick="discernWebPhoto">
               <image class="discern-icon" src="{{actBtns[2].icon}}"></image>
               <text class="discern-text">{{actBtns[2].name}}</text>
-            </div>
+            </div> -->
           </div>
           <!-- 选择图片后显示此界面 -->
           <div class="choosed-photo" if="isShowPhoto">
