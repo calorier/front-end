@@ -1,5 +1,8 @@
-/**
- * 请学姐将fetch 函数接口 写在这里 :)
- */
-
- 
+import fetch from './httpConfig'
+export function loginController(data){
+  console.log('begin loginController')
+  return fetch.post('/login',data)
+}
+export function registerController(data){
+  return fetch.post('/users',data)
+}
