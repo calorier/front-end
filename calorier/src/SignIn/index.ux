@@ -18,7 +18,7 @@
             <text class="hint">{{hint}}</text>
         </div>
         <!-- 注册按钮 -->
-        <btn btn-type="warning" title="注册并登录" onclick-btn="signIn"></btn>
+        <btn btn-type="warning" title="注册并登录" onclick-btn="Regist"></btn>
     </div>
 </template>
 <style>
@@ -37,7 +37,7 @@ input {
   margin: 8px 0 8px 0;
 }
 
-#signIn {
+#Regist {
   margin: 75px 0 0 0;
 }
 </style>
@@ -54,7 +54,7 @@ export default {
         verifyCode: '',
         hint: '错误信息'
     },
-    signIn() {
+    Regist() {
         //TODO: 补全注册代码
     },
     setUsername(e) {

@@ -43,7 +43,7 @@
       "Login": {
         "component": "index"
       },
-      "SignIn": {
+      "Regist": {
         "component": "index"
       },
       "FindPassword": {
@@ -82,7 +82,7 @@
       "Login": {
         "titleBarText": "登录"
       },
-      "SignIn": {
+      "Regist": {
         "titleBarText": "注册账号"
       },
       "FindPassword": {
