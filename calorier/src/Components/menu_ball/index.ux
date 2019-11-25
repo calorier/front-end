@@ -1,0 +1,65 @@
+<import name="ball" src="./ball.ux"></import>
+ 
+<template>
+    <div id="menu" class="container {{x}} {{y}}">
+        <div class="content" if="{{showMenu}}">
+            <ball for="(id, item) in items" link="{{item.link}}" id="{{item.id}}"></ball>
+        </div>
+        <div class="bar" onclick="show">
+            <ball link="{{menu.link}}" id="{{menu.id}}"></ball>
+        </div>
+    </div>
+</template>
+<script>
+export default {
+    props: {
+        showMenu: { type: Boolean, default: false },
+        menu: {
+            type: Object,
+            default: { link: 'http://i.caigoubao.cc/627095/calorier/icon-menu_items-sun.png', id: 'sun' }
+        },
+        items: {
+            type: Array,
+            default: [
+                { link: 'http://i.caigoubao.cc/627095/calorier/icon-menu_items-add.png', id: 'add' },
+                { link: 'http://i.caigoubao.cc/627095/calorier/icon-menu_items-sub.png', id: 'sub' }
+            ]
+        },
+        x: String,// 横向位置
+        y: String,//纵向位置
+    },
+    show() {
+        console.log()
+    },
+    onCreate() {
+        console.log(this.$element('menu'))
+    }
+}
+</script>
+<style>
+.content {
+  flex-direction: row;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.container{
+    position: fixed;
+}
+
+.right {
+  right: 0;
+}
+
+.left {
+  left: 0;
+}
+
+.top {
+  top: 200px;
+}
+
+.bottom {
+  bottom: 200px;
+}
+</style>

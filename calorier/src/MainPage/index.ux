@@ -2,7 +2,7 @@
 <import name="line-box" src="../Components/line_box"></import>
 <import name="btn" src="../Components/btn"></import>
 <import name="record-list" src="./record_list"></import>
- 
+  
  
 <template>
   <div class="page">
@@ -99,52 +99,53 @@ export default {
     showSearchBox: false,
     searchTextOfRecord: '',
     record: {
+      menuball: { x: 600, y: 600 },
       dateRule: '最近一个月',
       sortRule: '日期从晚到早',
       list: [
-        {          
+        {
           food: { name: '食物1', calorie: 12, information: '食物1的信息', ingredient: '食物1的原料', link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg' },
-          time: 'xxxx-xx-xx'
+          time: '2019-11-25'
         },
-        {          
+        {
           food: { name: '食物1', calorie: 12, information: '食物1的信息', ingredient: '食物1的原料', link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg' },
-          time: 'xxxx-xx-xx'
+          time: '2019-11-25'
         },
-        {          
+        {
           food: { name: '食物1', calorie: 12, information: '食物1的信息', ingredient: '食物1的原料', link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg' },
-          time: 'xxxx-xx-xx'
+          time: '2019-11-25'
         },
-        {          
+        {
           food: { name: '食物1', calorie: 12, information: '食物1的信息', ingredient: '食物1的原料', link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg' },
-          time: 'xxxx-xx-xx'
+          time: '2019-11-25'
         },
-        {          
+        {
           food: { name: '食物1', calorie: 12, information: '食物1的信息', ingredient: '食物1的原料', link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg' },
-          time: 'xxxx-xx-xx'
+          time: '2019-11-25'
         },
-        {          
+        {
           food: { name: '食物1', calorie: 12, information: '食物1的信息', ingredient: '食物1的原料', link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg' },
-          time: 'xxxx-xx-xx'
+          time: '2019-11-25'
         },
-        {          
+        {
           food: { name: '食物1', calorie: 12, information: '食物1的信息', ingredient: '食物1的原料', link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg' },
-          time: 'xxxx-xx-xx'
+          time: '2019-11-25'
         },
-        {          
+        {
           food: { name: '食物1', calorie: 12, information: '食物1的信息', ingredient: '食物1的原料', link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg' },
-          time: 'xxxx-xx-xx'
+          time: '2019-11-25'
         },
-        {          
+        {
           food: { name: '食物1', calorie: 12, information: '食物1的信息', ingredient: '食物1的原料', link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg' },
-          time: 'xxxx-xx-xx'
+          time: '2019-11-25'
         },
-        {          
+        {
           food: { name: '食物1', calorie: 12, information: '食物1的信息', ingredient: '食物1的原料', link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg' },
-          time: 'xxxx-xx-xx'
+          time: '2019-11-25'
         },
-        {          
+        {
           food: { name: '食物1', calorie: 12, information: '食物1的信息', ingredient: '食物1的原料', link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg' },
-          time: 'xxxx-xx-xx'
+          time: '2019-11-25'
         }
       ]
     }
@@ -277,7 +278,7 @@ export default {
       }
     })
   },
-  showSearch(){
+  showSearch() {
     this.showSearchBox = !this.showSearchBox
   }
 }

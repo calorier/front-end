@@ -20,7 +20,7 @@ export default {
 .container {
   flex-direction: row;
   height: 86px;
-  margin: 18px 18px;
+  margin: 10px
 }
 
 .title {

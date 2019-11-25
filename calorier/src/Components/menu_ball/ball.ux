@@ -1,0 +1,24 @@
+ <!-- 悬浮球菜单子组件 -->
+<template>
+    <div class="container" onclick="clickBall">
+        <image src="{{link}}"></image>
+    </div>
+</template>
+<script>
+export default {
+    props: {
+        link: String,
+        id: [String, Number]
+    },
+    clickBall() {
+        this.$emit('clickBall', { data: this.id })
+    }
+}
+</script>
+<style>
+.container {
+  width: 100px;
+  height: 100px;
+  margin: 50px;
+}
+</style>
