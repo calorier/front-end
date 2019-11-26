@@ -3,7 +3,7 @@
 <template>
     <div class="search {{type}}">
         <div class="search-box">
-            <input type="text" placeholder="请输入搜索内容" enterkeytype="搜索" onchange="input" onenterkeyclick="search"></input>
+            <input type="text" placeholder="请输入搜索内容" enterkeytype="search" onchange="input" onenterkeyclick="search"></input>
             <!-- 搜索图标 -->
             <image src="../../Common/images/icon-search-gray.png" onclick="search"></image>
         </div>
