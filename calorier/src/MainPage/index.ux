@@ -16,7 +16,7 @@
       <tab-content class="tab-content" scrollable="{{scrollable}}">
         <!-- 记录界面 -->
         <div class="tab-container">
-          <record-list ready-to-search="{{showSearchBox}}" onshow-search="showSearch" record="{{record.list}}" date-rule="{{record.dateRule}}" sort-rule="{{record.sortRule}}" onchoose-date="chooseRecordDate" onsort="sortRecord" onshow-charts="showCharts">
+          <record-list ready-to-search="{{showSearchBox}}" onshow-search="showSearch" records="{{records.list}}" date-rule="{{records.dateRule}}" sort-rule="{{records.sortRule}}" onchoose-date="chooseRecordDate" onsort="sortRecord" onshow-charts="showCharts">
           </record-list>
         </div>
         <!-- 开始界面 -->
@@ -105,7 +105,7 @@ export default {
     ],
     showSearchBox: false,
     searchTextOfRecord: '',
-    record: {
+    records: {
       menuball: { x: 600, y: 600 },
       dateRule: '最近一个月',
       sortRule: '日期从晚到早',
@@ -349,7 +349,7 @@ export default {
     prompt.showContextMenu({
       itemList: itemList,
       success: function (data) {
-        _this.record.dateRule = itemList[data.index]
+        _this.records.dateRule = itemList[data.index]
         //TODO: 重新请求服务器获取规定日期限的数据
       }
     })
@@ -366,7 +366,7 @@ export default {
     prompt.showContextMenu({
       itemList: itemList,
       success: function (data) {
-        _this.record.sortRule = itemList[data.index]
+        _this.records.sortRule = itemList[data.index]
         //TODO:重新请求服务器获取排序后的数据
       }
     })

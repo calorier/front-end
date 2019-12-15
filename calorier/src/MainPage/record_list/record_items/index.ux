@@ -3,34 +3,57 @@
 
 <template>
     <div class="container">
-        <div for="(id , item) in list">
-            <record-item food="{{item.food.name}}" calorie="{{item.food.calorie}}" time="{{item.time}}" link="{{item.food.link}}" id="{{id}}" onshow="show"></record-item>
-        </div>
+        <list class="records" scrollpage="false">
+            <list-item class="record" for="(id , item) in list">
+                <record-item food="{{item.food.name}}" calorie="{{item.food.calorie}}" time="{{item.time}}"
+                             link="{{item.food.link}}" id="{{id}}" onshow="show"></record-item>
+            </list-item>
+        </list>
     </div>
 </template>
 
 <script>
-import router from '@system.router'
-export default {
+  import router from '@system.router'
+
+  export default {
     props: {
-        list: Array
+      list: Array
     },
     //查看记录详细信息
-    show(e) {
-        let food = this.list[e.detail.data].food
-        router.push({
-            uri: 'MainPage/FoodInfo',
-            params: { name: food.name, calorie: food.calorie, information: food.information, ingredient: food.ingredient, link: food.link }
-        })
-    }
-}
+    show (e) {
+      let food = this.list[e.detail.data].food
+      router.push({
+        uri: 'MainPage/FoodInfo',
+        params: {
+          name: food.name,
+          calorie: food.calorie,
+          information: food.information,
+          ingredient: food.ingredient,
+          link: food.link
+        }
+      })
+    },
+    onInit () {
+      console.log(this.list)
+    },
+  }
 </script>
- 
- <style>
-.container {
-  width: 100%;
-  flex-direction: column;
-  justify-content: center;
-}
+
+<style>
+    .container {
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+    }
+    .records {
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .record {
+        align-items: center;
+        justify-content: center;
+    }
 </style>
- 

@@ -3,7 +3,7 @@
 <template>
     <div class="container {{size}} {{type}}" onclick="clickBtn">
         <!-- 按钮图标 -->
-        <image class="img" src="{{'http://i.caigoubao.cc/150_627095/calorier/' + icon}}" if="{{showIcon}}"></image>
+        <image class="img" src="{{'/Common/images/' + icon}}" if="{{showIcon}}"></image>
         <!-- 按钮名称 -->
         <text class="title" if="{{showText}}">{{text}}</text>
     </div>
