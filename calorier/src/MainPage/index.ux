@@ -5,475 +5,479 @@
 
 
 <template>
-    <div class="page">
-        <tabs class="tabs" index="0" onchange="changeTabactive">
-            <!-- 底部导航区 -->
-            <tab-bar class="tab-bar" mode="fixed">
-                <text class="tab-bar-text {{tabIndex === 0 ? 'tab-active' : 'tab-common' }}">记录</text>
-                <text class="tab-bar-text {{tabIndex === 1 ? 'tab-active' : 'tab-common' }}">开始</text>
-                <text class="tab-bar-text {{tabIndex === 2 ? 'tab-active' : 'tab-common' }}">设置</text>
-            </tab-bar>
-            <tab-content class="tab-content" scrollable="{{scrollable}}">
-                <!-- 记录界面 -->
-                <div class="tab-container">
-                    <record-list ready-to-search="{{showSearchBox}}"
-                                 onshow-search="showSearch"
-                                 record="{{record.list}}"
-                                 date-rule="{{record.dateRule}}"
-                                 sort-rule="{{record.sortRule}}"
-                                 onchoose-date="chooseRecordDate"
-                                 onsort="sortRecord"
-                                 onshow-charts="showCharts">
-                    </record-list>
-                </div>
-                <!-- 开始界面 -->
-                <div id="start-tab" class="tab-container">
-                    <div class="start-tab-title">
-                        <text>{{isShowPhoto ? '准备上传' : '开始识别'}}</text>
-                    </div>
-                    <!-- 识别方式按钮组 -->
-                    <div class="discern-buttons" if="!isShowPhoto">
-                        <!-- 拍摄识别 -->
-                        <div class="discern-button" onclick="discernTakePhoto">
-                            <image class="discern-icon" src="{{actBtns[0].icon}}"></image>
-                            <text class="discern-text">{{actBtns[0].name}}</text>
-                        </div>
-                        <!-- 本地识别 -->
-                        <div class="discern-button" onclick="discernLocalPhoto">
-                            <image class="discern-icon" src="{{actBtns[1].icon}}"></image>
-                            <text class="discern-text">{{actBtns[1].name}}</text>
-                        </div>
-                        <!-- 网络识别
-                        <div class="discern-button" onclick="discernWebPhoto">
-                          <image class="discern-icon" src="{{actBtns[2].icon}}"></image>
-                          <text class="discern-text">{{actBtns[2].name}}</text>
-                        </div> -->
-                    </div>
-                    <!-- 选择图片后显示此界面 -->
-                    <div class="choosed-photo" if="isShowPhoto">
-                        <!-- 已选择的图片预览 -->
-                        <image class="preview-photo" src="{{choosedPhoto}}"></image>
-                        <!-- 选择图片后的操作 -->
-                        <btn btn-type="primary" title="开始识别" onclick-btn="startDiscern"></btn>
-                        <btn btn-type="warning" title="重新选择" onclick-btn="rechoose"></btn>
-                    </div>
-                </div>
-                <!-- 设置界面 -->
-                <div id="setting" class="tab-container">
-                    <!-- 设置界面的线条按钮列表 -->
-                    <line-box for="{{lineList}}" list="{{$item}}" onclick-item="clickSettingListItem"></line-box>
-                </div>
-            </tab-content>
-        </tabs>
-    </div>
+  <div class="page">
+    <tabs class="tabs" index="1" onchange="changeTabactive">
+      <!-- 底部导航区 -->
+      <tab-bar class="tab-bar" mode="fixed">
+        <text class="tab-bar-text {{tabIndex === 0 ? 'tab-active' : 'tab-common' }}">记录</text>
+        <text class="tab-bar-text {{tabIndex === 1 ? 'tab-active' : 'tab-common' }}">开始</text>
+        <text class="tab-bar-text {{tabIndex === 2 ? 'tab-active' : 'tab-common' }}">设置</text>
+      </tab-bar>
+      <tab-content class="tab-content" scrollable="{{scrollable}}">
+        <!-- 记录界面 -->
+        <div class="tab-container">
+          <record-list ready-to-search="{{showSearchBox}}" onshow-search="showSearch" record="{{record.list}}" date-rule="{{record.dateRule}}" sort-rule="{{record.sortRule}}" onchoose-date="chooseRecordDate" onsort="sortRecord" onshow-charts="showCharts">
+          </record-list>
+        </div>
+        <!-- 开始界面 -->
+        <div id="start-tab" class="tab-container">
+          <div class="start-tab-title">
+            <text>{{isShowPhoto ? '准备上传' : '开始识别'}}</text>
+          </div>
+          <!-- 识别方式按钮组 -->
+          <div class="discern-buttons" if="!isShowPhoto">
+            <!-- 拍摄识别 -->
+            <div class="discern-button" onclick="discernTakePhoto">
+              <image class="discern-icon" src="{{actBtns[0].icon}}"></image>
+              <text class="discern-text">{{actBtns[0].name}}</text>
+            </div>
+            <!-- 本地识别 -->
+            <div class="discern-button" onclick="discernLocalPhoto">
+              <image class="discern-icon" src="{{actBtns[1].icon}}"></image>
+              <text class="discern-text">{{actBtns[1].name}}</text>
+            </div>
+          </div>
+          <div class="start-tab-title" if="!isShowPhoto">
+            <text>数据统计</text>
+          </div>
+          <div class="discern-buttons" if="!isShowPhoto">
+            <!-- 数据统计 -->
+            <div class="discern-button" onclick="showRecordCharts">
+              <image class="discern-icon" src="{{actBtns[2].icon}}"></image>
+              <text class="discern-text">{{actBtns[2].name}}</text>
+            </div>
+          </div>
+          <!-- 选择图片后显示此界面 -->
+          <div class="choosed-photo" if="isShowPhoto">
+            <!-- 已选择的图片预览 -->
+            <image class="preview-photo" src="{{choosedPhoto}}"></image>
+            <!-- 选择图片后的操作 -->
+            <btn btn-type="primary" title="开始识别" onclick-btn="startDiscern"></btn>
+            <btn btn-type="warning" title="重新选择" onclick-btn="rechoose"></btn>
+          </div>
+        </div>
+        <!-- 设置界面 -->
+        <div id="setting" class="tab-container">
+          <!-- 设置界面的线条按钮列表 -->
+          <line-box for="{{lineList}}" list="{{$item}}" onclick-item="clickSettingListItem"></line-box>
+        </div>
+      </tab-content>
+    </tabs>
+  </div>
 </template>
 
 <script>
-  import prompt from '@system.prompt'
-  import media from '@system.media'
-  import router from '@system.router'
-  import webview from '@system.webview'
+import prompt from '@system.prompt'
+import media from '@system.media'
+import router from '@system.router'
+import webview from '@system.webview'
 
-  export default {
-    protected: {
-      photoUri: '',
-      username: '',
-      userid: -1,
-      email: '',
-      avatar: '',
-      phone: '',
-      createTime: ''
-    },
-    private: {
-      title: ['识别记录', '开始', '设置'],
-      scrollable: true,
-      tabIndex: 1,
-      actBtns: [
-        { icon: '../Common/images/icon-take-photo.png', name: '拍摄图片识别' },
-        { icon: '../Common/images/icon-local-photo.png', name: '本地图片识别' },
-        { icon: '../Common/images/icon-web-photo.png', name: '网络图片识别' }
+export default {
+  protected: {
+    photoUri: '',
+    username: '',
+    userid: -1,
+    email: '',
+    avatar: '',
+    phone: '',
+    createTime: ''
+  },
+  private: {
+    title: ['识别记录', '开始', '设置'],
+    scrollable: true,
+    tabIndex: 1,
+    actBtns: [
+      { icon: '../Common/images/icon-take-photo.png', name: '拍摄图片识别' },
+      { icon: '../Common/images/icon-local-photo.png', name: '本地图片识别' },
+      // { icon: '../Common/images/icon-web-photo.png', name: '网络图片识别' }
+      { icon: '../Common/images/icon-web-photo.png', name: '历史数据统计' }
+    ],
+    isShowPhoto: false,
+    lineList: [
+      [
+        { title: '账户设置', remark: '', showLinkIcon: true, id: 'account-setting' },
+        { title: '通知', remark: '', showLinkIcon: true, id: 'notice' }
       ],
-      isShowPhoto: false,
-      lineList: [
-        [
-          { title: '账户设置', remark: '', showLinkIcon: true, id: 'account-setting' },
-          { title: '通知', remark: '', showLinkIcon: true, id: 'notice' }
+      [
+        { title: '退出当前账号', remark: '', id: 'logout' },
+        { title: '退出', remark: '', warning: true, id: 'exit' }
+      ]
+    ],
+    showSearchBox: false,
+    searchTextOfRecord: '',
+    record: {
+      menuball: { x: 600, y: 600 },
+      dateRule: '最近一个月',
+      sortRule: '日期从晚到早',
+      list: [
+        {
+          food: {
+            name: '食物1',
+            calorie: 12,
+            information: '食物1的信息',
+            ingredient: '食物1的原料',
+            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
+          },
+          time: '2019-11-25'
+        },
+        {
+          food: {
+            name: '食物1',
+            calorie: 12,
+            information: '食物1的信息',
+            ingredient: '食物1的原料',
+            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
+          },
+          time: '2019-11-25'
+        },
+        {
+          food: {
+            name: '食物1',
+            calorie: 12,
+            information: '食物1的信息',
+            ingredient: '食物1的原料',
+            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
+          },
+          time: '2019-11-25'
+        },
+        {
+          food: {
+            name: '食物1',
+            calorie: 12,
+            information: '食物1的信息',
+            ingredient: '食物1的原料',
+            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
+          },
+          time: '2019-11-25'
+        },
+        {
+          food: {
+            name: '食物1',
+            calorie: 12,
+            information: '食物1的信息',
+            ingredient: '食物1的原料',
+            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
+          },
+          time: '2019-11-25'
+        },
+        {
+          food: {
+            name: '食物1',
+            calorie: 12,
+            information: '食物1的信息',
+            ingredient: '食物1的原料',
+            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
+          },
+          time: '2019-11-25'
+        },
+        {
+          food: {
+            name: '食物1',
+            calorie: 12,
+            information: '食物1的信息',
+            ingredient: '食物1的原料',
+            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
+          },
+          time: '2019-11-25'
+        },
+        {
+          food: {
+            name: '食物1',
+            calorie: 12,
+            information: '食物1的信息',
+            ingredient: '食物1的原料',
+            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
+          },
+          time: '2019-11-25'
+        },
+        {
+          food: {
+            name: '食物1',
+            calorie: 12,
+            information: '食物1的信息',
+            ingredient: '食物1的原料',
+            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
+          },
+          time: '2019-11-25'
+        },
+        {
+          food: {
+            name: '食物1',
+            calorie: 12,
+            information: '食物1的信息',
+            ingredient: '食物1的原料',
+            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
+          },
+          time: '2019-11-25'
+        },
+        {
+          food: {
+            name: '食物1',
+            calorie: 12,
+            information: '食物1的信息',
+            ingredient: '食物1的原料',
+            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
+          },
+          time: '2019-11-25'
+        }
+      ]
+    }
+  },
+  changeTabactive(e) {
+    this.tabIndex = e.index
+    this.$page.setTitleBar({ text: this.title[this.tabIndex] })
+  },
+  onInit() {
+    this.$page.setTitleBar({ text: this.title[1] })
+  },
+  discernTakePhoto() {
+    let _this = this
+    media.takePhoto({
+      success: function (data) {
+        _this.isShowPhoto = true
+        _this.choosedPhoto = data.uri
+        //TODO: 将照片发送到服务器上
+      },
+      fail: function (data, code) {
+
+      }
+    })
+  },
+  discernLocalPhoto() {
+    let _this = this
+    media.pickImage({
+      success: function (data) {
+        console.log(data.uri)
+        _this.isShowPhoto = true
+        _this.choosedPhoto = data.uri
+        //TODO: 将照片发送到服务器上
+      },
+      fail: function (data, code) {
+
+      }
+    })
+  },
+  discernWebPhoto() {
+    router.push({
+      uri: '/MainPage/ChoosePhotoUri'
+    })
+  },
+  showRecordCharts() {
+    webview.loadUrl({
+      url: '../Common/html/charts.html'
+    })
+  },
+  startDiscern() {
+    //TODO:将图片文件上传到服务器
+  },
+  rechoose() {
+    this.choosedPhoto = ''
+    this.isShowPhoto = false
+  },
+  clickSettingListItem(e) {
+    let _this = this
+    switch (e.detail.id) {
+      case 'account-setting':
+
+        router.push({
+          uri: '/MainPage/AccountSetting',
+          params: { username: _this.username, email: _this.email, phone: this.phone, avatar: this.avatar }
+        })
+        break
+      case 'notice':
+        //TODO:转到通知页面
+        break
+      case 'logout':
+        logout()
+        break
+      case 'exit':
+        exit()
+        break
+      default:
+        break
+    }
+
+    function exit() {
+      prompt.showDialog({
+        title: '警告',
+        message: '您确认要退出快应用吗？',
+        buttons: [
+          { text: '确认', color: 'green' },
+          { text: '取消', color: 'darkgray' }
         ],
-        [
-          { title: '退出当前账号', remark: '', id: 'logout' },
-          { title: '退出', remark: '', warning: true, id: 'exit' }
-        ]
-      ],
-      showSearchBox: false,
-      searchTextOfRecord: '',
-      record: {
-        menuball: { x: 600, y: 600 },
-        dateRule: '最近一个月',
-        sortRule: '日期从晚到早',
-        list: [
-          {
-            food: {
-              name: '食物1',
-              calorie: 12,
-              information: '食物1的信息',
-              ingredient: '食物1的原料',
-              link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-            },
-            time: '2019-11-25'
-          },
-          {
-            food: {
-              name: '食物1',
-              calorie: 12,
-              information: '食物1的信息',
-              ingredient: '食物1的原料',
-              link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-            },
-            time: '2019-11-25'
-          },
-          {
-            food: {
-              name: '食物1',
-              calorie: 12,
-              information: '食物1的信息',
-              ingredient: '食物1的原料',
-              link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-            },
-            time: '2019-11-25'
-          },
-          {
-            food: {
-              name: '食物1',
-              calorie: 12,
-              information: '食物1的信息',
-              ingredient: '食物1的原料',
-              link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-            },
-            time: '2019-11-25'
-          },
-          {
-            food: {
-              name: '食物1',
-              calorie: 12,
-              information: '食物1的信息',
-              ingredient: '食物1的原料',
-              link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-            },
-            time: '2019-11-25'
-          },
-          {
-            food: {
-              name: '食物1',
-              calorie: 12,
-              information: '食物1的信息',
-              ingredient: '食物1的原料',
-              link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-            },
-            time: '2019-11-25'
-          },
-          {
-            food: {
-              name: '食物1',
-              calorie: 12,
-              information: '食物1的信息',
-              ingredient: '食物1的原料',
-              link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-            },
-            time: '2019-11-25'
-          },
-          {
-            food: {
-              name: '食物1',
-              calorie: 12,
-              information: '食物1的信息',
-              ingredient: '食物1的原料',
-              link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-            },
-            time: '2019-11-25'
-          },
-          {
-            food: {
-              name: '食物1',
-              calorie: 12,
-              information: '食物1的信息',
-              ingredient: '食物1的原料',
-              link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-            },
-            time: '2019-11-25'
-          },
-          {
-            food: {
-              name: '食物1',
-              calorie: 12,
-              information: '食物1的信息',
-              ingredient: '食物1的原料',
-              link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-            },
-            time: '2019-11-25'
-          },
-          {
-            food: {
-              name: '食物1',
-              calorie: 12,
-              information: '食物1的信息',
-              ingredient: '食物1的原料',
-              link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-            },
-            time: '2019-11-25'
-          }
-        ]
-      }
-    },
-    changeTabactive (e) {
-      this.tabIndex = e.index
-      this.$page.setTitleBar({ text: this.title[this.tabIndex] })
-    },
-    onInit () {
-      this.$page.setTitleBar({ text: this.title[1] })
-    },
-    discernTakePhoto () {
-      let _this = this
-      media.takePhoto({
         success: function (data) {
-          _this.isShowPhoto = true
-          _this.choosedPhoto = data.uri
-          //TODO: 将照片发送到服务器上
-        },
-        fail: function (data, code) {
-
+          if (data.index === 0)
+            _this.$app.exit()
         }
-      })
-    },
-    discernLocalPhoto () {
-      let _this = this
-      media.pickImage({
-        success: function (data) {
-          console.log(data.uri)
-          _this.isShowPhoto = true
-          _this.choosedPhoto = data.uri
-          //TODO: 将照片发送到服务器上
-        },
-        fail: function (data, code) {
-
-        }
-      })
-    },
-    discernWebPhoto () {
-      router.push({
-        uri: '/MainPage/ChoosePhotoUri'
-      })
-    },
-    startDiscern () {
-      //TODO:将图片文件上传到服务器
-    },
-    rechoose () {
-      this.choosedPhoto = ''
-      this.isShowPhoto = false
-    },
-    clickSettingListItem (e) {
-      let _this = this
-      switch (e.detail.id) {
-        case 'account-setting':
-
-          router.push({
-            uri: '/MainPage/AccountSetting',
-            params: { username: _this.username, email: _this.email, phone: this.phone, avatar: this.avatar }
-          })
-          break
-        case 'notice':
-          //TODO:转到通知页面
-          break
-        case 'logout':
-          logout()
-          break
-        case 'exit':
-          exit()
-          break
-        default:
-          break
-      }
-
-      function exit () {
-        prompt.showDialog({
-          title: '警告',
-          message: '您确认要退出快应用吗？',
-          buttons: [
-            { text: '确认', color: 'green' },
-            { text: '取消', color: 'darkgray' }
-          ],
-          success: function (data) {
-            if (data.index === 0)
-              _this.$app.exit()
-          }
-        })
-      }
-
-      function logout () {
-        prompt.showDialog({
-          title: '警告',
-          message: '您确认要注销当前账号吗？',
-          buttons: [
-            { text: '确认', color: 'green' },
-            { text: '取消', color: 'darkgray' }
-          ],
-          success: function (data) {
-            if (data.index === 0) {
-              router.replace({
-                uri: 'Login'
-              })
-            }
-          }
-        })
-      }
-    },
-    searchRecord () {
-      //TODO: 从数据库中搜索
-      console.log('搜索：' + this.searchTextOfRecord)
-    },
-    inputSearchText (e) {
-      this.searchTextOfRecord = e.detail.value
-    },
-    chooseRecordDate (e) {
-      let itemList = [
-        '最近一周',
-        '最近一个月',
-        '最近半年',
-        '最近一年',
-        '全部'
-      ]
-      let _this = this
-      prompt.showContextMenu({
-        itemList: itemList,
-        success: function (data) {
-          _this.record.dateRule = itemList[data.index]
-          //TODO: 重新请求服务器获取规定日期限的数据
-        }
-      })
-    },
-    sortRecord (e) {
-      let itemList = [
-        '日期从早到晚',
-        '日期从晚到早',
-        '食物名称',
-        'Calorie值从大到小',
-        'Calorie值从小到大'
-      ]
-      let _this = this
-      prompt.showContextMenu({
-        itemList: itemList,
-        success: function (data) {
-          _this.record.sortRule = itemList[data.index]
-          //TODO:重新请求服务器获取排序后的数据
-        }
-      })
-    },
-    showSearch () {
-      this.showSearchBox = !this.showSearchBox
-    },
-    showCharts(){
-      webview.loadUrl({
-        url: '../Common/html/chart.html'
       })
     }
+
+    function logout() {
+      prompt.showDialog({
+        title: '警告',
+        message: '您确认要注销当前账号吗？',
+        buttons: [
+          { text: '确认', color: 'green' },
+          { text: '取消', color: 'darkgray' }
+        ],
+        success: function (data) {
+          if (data.index === 0) {
+            router.replace({
+              uri: 'Login'
+            })
+          }
+        }
+      })
+    }
+  },
+  searchRecord() {
+    //TODO: 从数据库中搜索
+    console.log('搜索：' + this.searchTextOfRecord)
+  },
+  inputSearchText(e) {
+    this.searchTextOfRecord = e.detail.value
+  },
+  chooseRecordDate(e) {
+    let itemList = [
+      '最近一周',
+      '最近一个月',
+      '最近半年',
+      '最近一年',
+      '全部'
+    ]
+    let _this = this
+    prompt.showContextMenu({
+      itemList: itemList,
+      success: function (data) {
+        _this.record.dateRule = itemList[data.index]
+        //TODO: 重新请求服务器获取规定日期限的数据
+      }
+    })
+  },
+  sortRecord(e) {
+    let itemList = [
+      '日期从早到晚',
+      '日期从晚到早',
+      '食物名称',
+      'Calorie值从大到小',
+      'Calorie值从小到大'
+    ]
+    let _this = this
+    prompt.showContextMenu({
+      itemList: itemList,
+      success: function (data) {
+        _this.record.sortRule = itemList[data.index]
+        //TODO:重新请求服务器获取排序后的数据
+      }
+    })
+  },
+  showSearch() {
+    this.showSearchBox = !this.showSearchBox
+  },
+  showRecordCharts() {
+    webview.loadUrl({
+      url: 'http://www.92yan.online:8080/pages/picture-game/'
+    })
   }
+}
 </script>
 
 <style>
-    @import "../Common/css/main.css";
+@import "../Common/css/main.css";
 
-    #start-discern {
-        margin: 75px 0;
-    }
+#start-discern {
+  margin: 75px 0;
+}
 
-    .tab-bar {
-        position: fixed;
-        padding: 15px 0;
-        bottom: 0px;
-        margin: 0;
-        flex-direction: row;
-        justify-content: space-between;
-        background-color: #f5f5f5;
-    }
+.tab-bar {
+  position: fixed;
+  padding: 15px 0;
+  bottom: 0px;
+  margin: 0;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+}
 
-    .discern-buttons {
-        flex-direction: column;
-        margin-top: 75px;
-    }
+.discern-buttons {
+  flex-direction: column;
+  /* margin-top: 75px; */
+}
 
-    .tab-content {
-        align-items: center;
-        padding-bottom: 111px;
-    }
+.tab-content {
+  align-items: center;
+  padding-bottom: 111px;
+}
 
-    .discern-button {
-        width: 550px;
-        height: 200px;
-        padding: 25px 75px;
-        margin: 50px 0;
-        justify-content: space-between;
-        border: 1px solid #a9a9a9;
-    }
+.discern-button {
+  width: 550px;
+  height: 200px;
+  padding: 25px 75px;
+  margin: 50px 0;
+  justify-content: space-between;
+  border: 1px solid #a9a9a9;
+}
 
-    .discern-icon {
-        width: 150px;
-        height: 150px;
-    }
+.discern-icon {
+  width: 150px;
+  height: 150px;
+}
 
-    #start-tab {
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        padding-top: 50px;
-    }
+#start-tab {
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 50px;
+}
 
-    .tab-container {
-        margin-bottom: 250px;
-    }
+.tab-container {
+  margin-bottom: 250px;
+}
 
-    .tabs {
-        margin: 25px;
-    }
+.tabs {
+  margin: 25px;
+}
 
-    .start-tab-title > text {
-        font-size: 54px;
-    }
+.start-tab-title > text {
+  font-size: 54px;
+}
 
-    .tab-active {
-        color: #ff0000;
-        font-size: 36px;
-        border-bottom: 5px solid #8faadc;
-    }
+.tab-active {
+  color: #ff0000;
+  font-size: 36px;
+  border-bottom: 5px solid #8faadc;
+}
 
-    .tab-common {
-        color: #2f4f4f;
-        font-size: 32px;
-    }
+.tab-common {
+  color: #2f4f4f;
+  font-size: 32px;
+}
 
-    .tab-bar-text {
-        padding: 15px;
-        text-align: center;
-        flex: 1;
-    }
+.tab-bar-text {
+  padding: 15px;
+  text-align: center;
+  flex: 1;
+}
 
-    .preview-photo {
-        width: 550px;
-    }
+.preview-photo {
+  width: 550px;
+}
 
-    .choosed-photo-text {
-        width: 550px;
-        text-align: center;
-        margin: 30px;
-    }
+.choosed-photo-text {
+  width: 550px;
+  text-align: center;
+  margin: 30px;
+}
 
-    .choosed-photo {
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        margin: 75px 0;
-    }
+.choosed-photo {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 75px 0;
+}
 
-    #setting {
-        flex-direction: column;
-        justify-content: flex-start;
-    }
+#setting {
+  flex-direction: column;
+  justify-content: flex-start;
+}
 </style>
