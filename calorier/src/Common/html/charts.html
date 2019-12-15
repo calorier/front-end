@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>历史数据分析</title>
+    <script type="text/javascript" src="../../libs/js/highcharts.js"></script>
+    <script type="text/javascript"></script>
+</head>
+<body>
+<div id="charts" style="min-width: 360px;height: 600px;"></div>
+</body>
+<script type="text/javascript">
+  var dates= [
+    '一月',
+    '二月',
+    '三月',
+    '四月',
+    '五月',
+    '六月',
+    '七月',
+    '八月',
+    '九月',
+    '十月',
+    '十一月',
+    '十二月'
+  ]
+  var chart = Highcharts.chart('charts', {
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: '卡路里摄入数据统计'
+    },
+    subtitle: {
+      text: '每日摄入量'
+    },
+    xAxis: {
+      categories: dates
+    },
+    yAxis: {
+      title: {
+        text: '摄入量/g'
+      }
+    },
+    series: [
+      {name: '一年内每月摄入量统计', data: [288,999,546,222,789,482,756,354,952,136,762,482]}
+    ]
+  })
+</script>
+</html>
