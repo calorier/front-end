@@ -8,83 +8,82 @@
 
 
 <template>
-    <div class="container">
-        <!-- 过滤条件按钮 -->
-        <div class="top">
-          <div class="query-btn">
-            <logo-text-btn text="{{dateRule}}" icon="icon-date.png" size="middle"
-                           onclick-btn="chooseDate"></logo-text-btn>
-            <logo-text-btn text="{{sortRule}}" icon="icon-sort.png" size="middle" onclick-btn="sort"></logo-text-btn>
-            <logo-text-btn text="" icon="{{!readyToSearch ? 'icon-left-point.png' : 'icon-down-point.png' }}"
-                           show-text="{{false}}" size="min" onclick-btn="showSearch"></logo-text-btn>
-        </div>
-        <!-- 搜索框 -->
-        <search-box type="border" onsearch="search" value="{{searchText}}" if="readyToSearch"></search-box>
-        </div>
-        <!-- 水平分割线 -->
-        <hr type="fill"></hr>
-        <!-- 记录列表 -->
-        <record-items list="{{records}}"></record-items>
+  <div class="container">
+    <!-- 过滤条件按钮 -->
+    <div class="top">
+      <div class="query-btn">
+        <logo-text-btn text="{{dateRule}}" icon="icon-date.png" size="middle" onclick-btn="chooseDate"></logo-text-btn>
+        <logo-text-btn text="{{sortRule}}" icon="icon-sort.png" size="middle" onclick-btn="sort"></logo-text-btn>
+        <logo-text-btn text="" icon="{{!readyToSearch ? 'icon-left-point.png' : 'icon-down-point.png' }}" show-text="{{false}}" size="min" onclick-btn="showSearch"></logo-text-btn>
+      </div>
+      <!-- 搜索框 -->
+      <search-box type="border" onsearch="search" value="{{searchText}}" if="readyToSearch"></search-box>
     </div>
+    <!-- 水平分割线 -->
+    <hr type="fill">
+    </hr>
+    <!-- 记录列表 -->
+    <record-items list="{{records}}"></record-items>
+  </div>
 
 </template>
 
 <script>
-  import prompt from '@system.prompt'
+import prompt from '@system.prompt'
 
-  export default {
-    props: {
-      searchText: { type: String, default: '' },
-      dateRule: { type: String, default: '最近一个月' },
-      sortRule: { type: String, default: '日期从晚到早' },
-      readyToSearch: { type: Boolean, default: false },
-      records: Array
-    },
-    data: {
-      menuball: { x: 'right', y: 'bottom' }
-    },
-    inputSearchText (e) {
-      this.searchText = e.detail.value
-    },
-    search (e) {
-      //TODO: 像服务器发起搜索数据请求
-      this.$emit('search', { data: this.searchText })
-    },
-    chooseDate () {
-      this.$emit('chooseDate')
-    },
-    sort () {
-      this.$emit('sort')
-    },
-    showSearch () {
-      this.$emit('showSearch')
-    },
-    showCharts () {
-      this.$emit('showCharts')
-    }
+export default {
+  props: {
+    searchText: { type: String, default: '' },
+    dateRule: { type: String, default: '最近一月' },
+    sortRule: { type: String, default: '日期从晚到早' },
+    readyToSearch: { type: Boolean, default: false },
+    records: Array
+  },
+  data: {
+    menuball: { x: 'right', y: 'bottom' }
+  },
+  inputSearchText(e) {
+    this.searchText = e.detail.value
+  },
+  search(e) {
+    //TODO: 像服务器发起搜索数据请求
+    this.$emit('search', { data: this.searchText })
+  },
+  chooseDate() {
+    this.$emit('chooseDate')
+  },
+  sort() {
+    this.$emit('sort')
+  },
+  showSearch() {
+    this.$emit('showSearch')
+  },
+  showCharts() {
+    this.$emit('showCharts')
   }
+}
 </script>
 
 <style>
-    .container {
-        flex-direction: column;
-        justify-content: flex-start;
-    }
+.container {
+  flex-direction: column;
+  justify-content: flex-start;
+}
 
-    .query-btn {
-        margin: 10px 0;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
+.query-btn {
+  margin: 10px 0;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    hr{
-      margin-top: 25px;
-    }
+hr {
+  margin-top: 25px;
+}
 
-    .top{
-      flex-direction: column;
-      justify-content: flex-start;
-      flex: 1;
-    }
+.top {
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 0;
+}
 </style>
