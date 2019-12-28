@@ -1,13 +1,20 @@
 <!-- 水平分割线 -->
 
 <template>
-    <div class="container {{color}} {{width}}"></div>
+    <div class="container {{color}} {{width}} {{type}}"></div>
 </template>
 
 <style>
 .container {
-  width: 100%;
   border-style: solid;
+}
+
+.fill{
+    width: 100%;
+}
+
+.full{
+  width: 750px;
 }
 
 .bold {
@@ -51,7 +58,8 @@
 export default {
     props: {
         color: { type: String, default: 'gray' },
-        width: { type: String, default: 'thin' }
+        width: { type: String, default: 'thin' },
+        type:{type:String,default: 'fill'}
     }
 }
 </script>

@@ -27,7 +27,7 @@
     {
       "name": "system.webview"
     }
-  ],
+  ], 
   "permissions": [
     {
       "origin": "*"

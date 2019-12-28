@@ -340,10 +340,10 @@ export default {
   chooseRecordDate(e) {
     let itemList = [
       '最近一周',
-      '最近一个月',
+      '最近一月',
       '最近半年',
       '最近一年',
-      '全部'
+      '全部显示'
     ]
     let _this = this
     prompt.showContextMenu({
@@ -358,9 +358,9 @@ export default {
     let itemList = [
       '日期从早到晚',
       '日期从晚到早',
-      '食物名称',
-      'Calorie值从大到小',
-      'Calorie值从小到大'
+      '食物名称顺序',
+      '卡路里从大到小',
+      '卡路里从小到大'
     ]
     let _this = this
     prompt.showContextMenu({
