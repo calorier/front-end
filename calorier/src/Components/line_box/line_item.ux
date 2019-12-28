@@ -1,10 +1,13 @@
 <!-- 线框按钮基组件 -->
 <template>
   <div class="line-item bottom-border" onclick="clickItem(id)">
-    <text class="line-title {{warning ? 'line-title-red' : 'line-title-black'}} {{setTextPosition(textPosition)}}">{{title}}</text>
+    <div class=left-box>
+      <image if="{{showIcon}}" class="head-icon" src="{{icon}}"></image>
+      <text class="line-title {{warning ? 'line-title-red' : 'line-title-black'}} {{setTextPosition(textPosition)}}">{{title}}</text>
+    </div>
     <div class="right-box">
       <text class="line-remark">{{remark}}</text>
-      <image src="./arrow_right.png" if="showLinkIcon"></image>
+      <image class="icon-remark" src="./arrow_right.png" if="showLinkIcon"></image>
     </div>
   </div>
 </template>
@@ -15,11 +18,11 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'title'
+      default: ''
     },
     remark: {
       type: String,
-      default: 'remark'
+      default: ''
     },
     showLinkIcon: {
       type: Boolean,
@@ -32,6 +35,14 @@ export default {
     textPosition: {
       type: String,
       default: 'left'
+    },
+    showIcon:{
+      type: Boolean,
+      default: false
+    },
+    icon:{
+      type:String,
+      default: ''
     },
     id: [String, Number]
   },
@@ -88,7 +99,7 @@ export default {
   color: #adadad;
   font-size: 25px;
 }
-image {
+.icon-remark {
   margin-left: 20px;
   width: 18px;
 }
@@ -112,5 +123,17 @@ image {
 
 .line-title-right {
   text-align: right;
+}
+
+.left-box{
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.head-icon{
+  width: 75px;
+  height: 75px;
+  margin-right: 25px;
 }
 </style>

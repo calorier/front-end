@@ -2,7 +2,8 @@
 <import name="line-box" src="../Components/line_box"></import>
 <import name="btn" src="../Components/btn"></import>
 <import name="record-list" src="./record_list"></import>
-
+<import name="search" src="../Components/search_box"></import>
+ 
 
 <template>
   <div class="page">
@@ -12,7 +13,7 @@
         <text class="tab-bar-text {{tabIndex === 0 ? 'tab-active' : 'tab-common' }}">记录</text>
         <text class="tab-bar-text {{tabIndex === 1 ? 'tab-active' : 'tab-common' }}">开始</text>
         <text class="tab-bar-text {{tabIndex === 2 ? 'tab-active' : 'tab-common' }}">好友</text>
-        <text class="tab-bar-text {{tabIndex === 3 ? 'tab-active' : 'tab-common' }}">我</text>
+        <text class="tab-bar-text {{tabIndex === 3 ? 'tab-active' : 'tab-common' }}">设置</text>
       </tab-bar>
       <tab-content class="tab-content" scrollable="{{scrollable}}">
         <!-- 记录界面 -->
@@ -43,12 +44,6 @@
               <text class="discern-text">{{actBtns[2].name}}</text>
             </div>
           </div>
-          <!-- <div class="start-tab-title" if="!isShowPhoto">
-            <text>数据统计</text>
-          </div> -->
-          <!-- <div class="discern-buttons" if="!isShowPhoto">
-            
-          </div> -->
           <!-- 选择图片后显示此界面 -->
           <div class="choosed-photo" if="isShowPhoto">
             <!-- 已选择的图片预览 -->
@@ -59,8 +54,11 @@
           </div>
         </div>
         <!-- 好友界面 -->
-        <div id="friends" class="tab-container"></div>
-        <!-- 我界面 -->
+        <div id="friends" class="tab-container">
+          <search-box ></search-box>
+          <line-box for="{{friendsList}}" list="{{$item}}" onclick-item="clickFriendsListItem"></line-box>
+        </div>
+        <!-- 设置界面 -->
         <div id="setting" class="tab-container">
           <!-- 设置界面的线条按钮列表 -->
           <line-box for="{{lineList}}" list="{{$item}}" onclick-item="clickSettingListItem"></line-box>
@@ -87,24 +85,35 @@ export default {
     createTime: ''
   },
   private: {
-    title: ['识别记录', '开始', '设置'],
+    title: ['识别记录', '开始', '好友列表','设置'],
     scrollable: true,
     tabIndex: 1,
     actBtns: [
       { icon: '/Common/images/icon-take-photo.png', name: '拍摄图片识别' },
       { icon: '/Common/images/icon-local-photo.png', name: '本地图片识别' },
-      // { icon: '../Common/images/icon-web-photo.png', name: '网络图片识别' }
       { icon: '/Common/images/icon-web-photo.png', name: '查看历史数据' }
     ],
     isShowPhoto: false,
     lineList: [
       [
-        { title: '账户设置', remark: '', showLinkIcon: true, id: 'account-setting' },
-        { title: '通知', remark: '', showLinkIcon: true, id: 'notice' }
+        { title: '账户设置', showLinkIcon: true, id: 'account-setting' },
+        { title: '通知', showLinkIcon: true, id: 'notice' }
       ],
       [
-        { title: '退出当前账号', remark: '', id: 'logout' },
-        { title: '退出', remark: '', warning: true, id: 'exit' }
+        { title: '退出当前账号', id: 'logout' },
+        { title: '退出', warning: true, id: 'exit' }
+      ]
+    ],
+    friendsList:[
+      [
+        {title: 'jakads', showIcon: true, icon: 'http://img0.imgtn.bdimg.com/it/u=780761296,515981492&fm=26&gp=0.jpg'},
+        {title: 'jhlee0133', showIcon: true, icon: 'http://img0.imgtn.bdimg.com/it/u=780761296,515981492&fm=26&gp=0.jpg'},
+        {title: 'wonder5193', showIcon: true, icon: 'http://img0.imgtn.bdimg.com/it/u=780761296,515981492&fm=26&gp=0.jpg'},
+        {title: 'SillyFangirl', showIcon: true, icon: 'http://img0.imgtn.bdimg.com/it/u=780761296,515981492&fm=26&gp=0.jpg'},
+        {title: 'Attang', showIcon: true, icon: 'http://img0.imgtn.bdimg.com/it/u=780761296,515981492&fm=26&gp=0.jpg'},
+        {title: 'WindyS', showIcon: true, icon: 'http://img0.imgtn.bdimg.com/it/u=780761296,515981492&fm=26&gp=0.jpg'},
+        {title: 'Abcdullah', showIcon: true, icon: 'http://img0.imgtn.bdimg.com/it/u=780761296,515981492&fm=26&gp=0.jpg'},
+        {title: 'Sern888', showIcon: true, icon: 'http://img0.imgtn.bdimg.com/it/u=780761296,515981492&fm=26&gp=0.jpg'},
       ]
     ],
     showSearchBox: false,
@@ -483,5 +492,11 @@ export default {
 #setting {
   flex-direction: column;
   justify-content: flex-start;
+}
+
+#friends{
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 </style>

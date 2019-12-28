@@ -61,7 +61,7 @@ export default {
     private: {
         usernameOrEmail: '',
         password: '',
-        icon: '../Common/logo.png',
+        icon: '../Common/images/app.png',
         hint: '错误信息' //提示信息都在这里显示
     },
     login() {
@@ -80,7 +80,7 @@ export default {
             username: 'test',
             userid: 1,
             email: 'example@xxx.xxx',
-            avatar: '../Common/logo.png',
+            avatar: '../Common/images/app2.png',
             phone: '123456',
             createTime: 'YYYY-MM-DD HH:mm:ss'
         } 

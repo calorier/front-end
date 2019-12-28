@@ -36,6 +36,6 @@ export default {
   background-color: #fff;
   padding-left: 30px;
   padding-right: 30px;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 </style>

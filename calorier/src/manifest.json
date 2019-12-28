@@ -3,8 +3,8 @@
   "name": "Calorier",
   "versionName": "1.0.0",
   "versionCode": "1",
-  "minPlatformVersion": "1050",
-  "icon": "/Common/logo.png",
+  "minPlatformVersion": "1030",
+  "icon": "/Common/images/app.png",
   "features": [
     {
       "name": "system.prompt"
