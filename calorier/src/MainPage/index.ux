@@ -3,11 +3,11 @@
 <import name="btn" src="../Components/btn"></import>
 <import name="record-list" src="./record_list"></import>
 <import name="search" src="../Components/search_box"></import>
- 
+<import name="friendspage" src="./friendspage.ux"></import>
 
 <template>
   <div class="page">
-    <tabs class="tabs" index="1" onchange="changeTabactive">
+    <tabs class="tabs" index="1" onchange="changeTabActive">
       <!-- 底部导航区 -->
       <tab-bar class="tab-bar" mode="fixed">
         <text class="tab-bar-text {{tabIndex === 0 ? 'tab-active' : 'tab-common' }}">记录</text>
@@ -23,9 +23,6 @@
         </div>
         <!-- 开始界面 -->
         <div id="start-tab" class="tab-container">
-          <!-- <div class="start-tab-title">
-            <text>{{isShowPhoto ? '准备上传' : '开始识别'}}</text>
-          </div> -->
           <!-- 识别方式按钮组 -->
           <div class="discern-buttons" if="!isShowPhoto">
             <!-- 拍摄识别 -->
@@ -55,8 +52,23 @@
         </div>
         <!-- 好友界面 -->
         <div id="friends" class="tab-container">
-          <search-box ></search-box>
-          <line-box for="{{friendsList}}" list="{{$item}}" onclick-item="clickFriendsListItem"></line-box>
+<!--          <friendspage friends-list="{{friendsList}}" message-list="{{messageList}}"></friendspage>-->
+          <tabs class="friend-tabs" index="0" onchange="changeFriendsTabActive">
+            <tab-bar class="friend-tab-bar" mode="fixed">
+              <text class="tab-bar-text {{tabIndex2 === 0 ? 'tab-active' : 'tab-common' }}">消息</text>
+              <text class="tab-bar-text {{tabIndex2 === 1 ? 'tab-active' : 'tab-common' }}">好友</text>
+            </tab-bar>
+            <tab-content class="tab-content">
+              <div class="tab-container message-list">
+                <search-box place-holder="搜索"></search-box>
+                <line-box for="{{messageList}}" list="{{$item}}" onclick-item="clickMessageListItem"></line-box>
+              </div>
+              <div class="tab-container friends-list">
+                <search-box place-holder="搜索好友"></search-box>
+                <line-box for="{{(id,item) in friendsList}}" list="{{item}}" onclick-item="clickFriendsListItem"></line-box>
+              </div>
+            </tab-content>
+          </tabs>
         </div>
         <!-- 设置界面 -->
         <div id="setting" class="tab-container">
@@ -69,434 +81,388 @@
 </template>
 
 <script>
-import prompt from '@system.prompt'
-import media from '@system.media'
-import router from '@system.router'
-import webview from '@system.webview'
+  import prompt from '@system.prompt'
+  import media from '@system.media'
+  import router from '@system.router'
+  import webview from '@system.webview'
 
-export default {
-  protected: {
-    photoUri: '',
-    username: '',
-    userid: -1,
-    email: '',
-    avatar: '',
-    phone: '',
-    createTime: ''
-  },
-  private: {
-    title: ['识别记录', '开始', '好友列表','设置'],
-    scrollable: true,
-    tabIndex: 1,
-    actBtns: [
-      { icon: '/Common/images/icon-take-photo.png', name: '拍摄图片识别' },
-      { icon: '/Common/images/icon-local-photo.png', name: '本地图片识别' },
-      { icon: '/Common/images/icon-web-photo.png', name: '查看历史数据' }
-    ],
-    isShowPhoto: false,
-    lineList: [
-      [
-        { title: '账户设置', showLinkIcon: true, id: 'account-setting' },
-        { title: '通知', showLinkIcon: true, id: 'notice' }
+  export default {
+    protected: {
+      photoUri: '',
+      username: '',
+      userid: -1,
+      email: '',
+      avatar: '',
+      phone: '',
+      createTime: ''
+    },
+    private: {
+      title: ['识别记录', '开始', '好友列表', '设置'],
+      scrollable: true,
+      tabIndex: 1,
+      tabIndex2: 0,
+      actBtns: [
+        { icon: '/Common/images/icon-take-photo.png', name: '拍摄图片识别' },
+        { icon: '/Common/images/icon-local-photo.png', name: '本地图片识别' },
+        { icon: '/Common/images/icon-web-photo.png', name: '查看历史数据' }
       ],
-      [
-        { title: '退出当前账号', id: 'logout' },
-        { title: '退出', warning: true, id: 'exit' }
-      ]
-    ],
-    friendsList:[
-      [
-        {title: 'jakads', showIcon: true, icon: 'http://img0.imgtn.bdimg.com/it/u=780761296,515981492&fm=26&gp=0.jpg'},
-        {title: 'jhlee0133', showIcon: true, icon: 'http://img0.imgtn.bdimg.com/it/u=780761296,515981492&fm=26&gp=0.jpg'},
-        {title: 'wonder5193', showIcon: true, icon: 'http://img0.imgtn.bdimg.com/it/u=780761296,515981492&fm=26&gp=0.jpg'},
-        {title: 'SillyFangirl', showIcon: true, icon: 'http://img0.imgtn.bdimg.com/it/u=780761296,515981492&fm=26&gp=0.jpg'},
-        {title: 'Attang', showIcon: true, icon: 'http://img0.imgtn.bdimg.com/it/u=780761296,515981492&fm=26&gp=0.jpg'},
-        {title: 'WindyS', showIcon: true, icon: 'http://img0.imgtn.bdimg.com/it/u=780761296,515981492&fm=26&gp=0.jpg'},
-        {title: 'Abcdullah', showIcon: true, icon: 'http://img0.imgtn.bdimg.com/it/u=780761296,515981492&fm=26&gp=0.jpg'},
-        {title: 'Sern888', showIcon: true, icon: 'http://img0.imgtn.bdimg.com/it/u=780761296,515981492&fm=26&gp=0.jpg'},
-      ]
-    ],
-    showSearchBox: false,
-    searchTextOfRecord: '',
-    record: {
-      menuball: { x: 600, y: 600 },
-      dateRule: '最近一个月',
-      sortRule: '日期从晚到早',
-      list: [
-        {
-          food: {
-            name: '食物1',
-            calorie: 12,
-            information: '食物1的信息',
-            ingredient: '食物1的原料',
-            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-          },
-          time: '2019-11-25'
-        },
-        {
-          food: {
-            name: '食物1',
-            calorie: 12,
-            information: '食物1的信息',
-            ingredient: '食物1的原料',
-            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-          },
-          time: '2019-11-25'
-        },
-        {
-          food: {
-            name: '食物1',
-            calorie: 12,
-            information: '食物1的信息',
-            ingredient: '食物1的原料',
-            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-          },
-          time: '2019-11-25'
-        },
-        {
-          food: {
-            name: '食物1',
-            calorie: 12,
-            information: '食物1的信息',
-            ingredient: '食物1的原料',
-            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-          },
-          time: '2019-11-25'
-        },
-        {
-          food: {
-            name: '食物1',
-            calorie: 12,
-            information: '食物1的信息',
-            ingredient: '食物1的原料',
-            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-          },
-          time: '2019-11-25'
-        },
-        {
-          food: {
-            name: '食物1',
-            calorie: 12,
-            information: '食物1的信息',
-            ingredient: '食物1的原料',
-            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-          },
-          time: '2019-11-25'
-        },
-        {
-          food: {
-            name: '食物1',
-            calorie: 12,
-            information: '食物1的信息',
-            ingredient: '食物1的原料',
-            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-          },
-          time: '2019-11-25'
-        },
-        {
-          food: {
-            name: '食物1',
-            calorie: 12,
-            information: '食物1的信息',
-            ingredient: '食物1的原料',
-            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-          },
-          time: '2019-11-25'
-        },
-        {
-          food: {
-            name: '食物1',
-            calorie: 12,
-            information: '食物1的信息',
-            ingredient: '食物1的原料',
-            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-          },
-          time: '2019-11-25'
-        },
-        {
-          food: {
-            name: '食物1',
-            calorie: 12,
-            information: '食物1的信息',
-            ingredient: '食物1的原料',
-            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-          },
-          time: '2019-11-25'
-        },
-        {
-          food: {
-            name: '食物1',
-            calorie: 12,
-            information: '食物1的信息',
-            ingredient: '食物1的原料',
-            link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
-          },
-          time: '2019-11-25'
-        }
-      ]
-    }
-  },
-  changeTabactive(e) {
-    this.tabIndex = e.index
-    this.$page.setTitleBar({ text: this.title[this.tabIndex] })
-  },
-  onInit() {
-    this.$page.setTitleBar({ text: this.title[1] })
-  },
-  discernTakePhoto() {
-    let _this = this
-    media.takePhoto({
-      success: function (data) {
-        _this.isShowPhoto = true
-        _this.choosedPhoto = data.uri
-        //TODO: 将照片发送到服务器上
-      },
-      fail: function (data, code) {
-
-      }
-    })
-  },
-  discernLocalPhoto() {
-    let _this = this
-    media.pickImage({
-      success: function (data) {
-        console.log(data.uri)
-        _this.isShowPhoto = true
-        _this.choosedPhoto = data.uri
-        //TODO: 将照片发送到服务器上
-      },
-      fail: function (data, code) {
-
-      }
-    })
-  },
-  discernWebPhoto() {
-    router.push({
-      uri: '/MainPage/ChoosePhotoUri'
-    })
-  },
-  showRecordCharts() {
-    webview.loadUrl({
-      url: '../Common/html/charts.html'
-    })
-  },
-  startDiscern() {
-    //TODO:将图片文件上传到服务器
-  },
-  rechoose() {
-    this.choosedPhoto = ''
-    this.isShowPhoto = false
-  },
-  clickSettingListItem(e) {
-    let _this = this
-    switch (e.detail.id) {
-      case 'account-setting':
-
-        router.push({
-          uri: '/MainPage/AccountSetting',
-          params: { username: _this.username, email: _this.email, phone: this.phone, avatar: this.avatar }
-        })
-        break
-      case 'notice':
-        //TODO:转到通知页面
-        break
-      case 'logout':
-        logout()
-        break
-      case 'exit':
-        exit()
-        break
-      default:
-        break
-    }
-
-    function exit() {
-      prompt.showDialog({
-        title: '警告',
-        message: '您确认要退出快应用吗？',
-        buttons: [
-          { text: '确认', color: 'green' },
-          { text: '取消', color: 'darkgray' }
+      isShowPhoto: false,
+      lineList: [
+        [
+          { title: '账户设置', showLinkIcon: true, id: 'account-setting' },
+          { title: '通知', showLinkIcon: true, id: 'notice' }
         ],
+        [
+          { title: '退出当前账号', id: 'logout' },
+          { title: '退出', warning: true, id: 'exit' }
+        ]
+      ],
+      friendsList: [
+        [
+          { title: 'jakads', showIcon: true, icon: '/Common/images/app.png' },
+          { title: 'jhlee0133', showIcon: true, icon: '/Common/images/app.png' },
+          { title: 'wonder5193', showIcon: true, icon: '/Common/images/app.png' },
+          { title: 'SillyFangirl', showIcon: true, icon: '/Common/images/app.png' },
+          { title: 'Attang', showIcon: true, icon: '/Common/images/app.png' },
+          { title: 'WindyS', showIcon: true, icon: '/Common/images/app.png' },
+          { title: 'Abcdullah', showIcon: true, icon: '/Common/images/app.png' },
+          { title: 'Sern888', showIcon: true, icon: '/Common/images/app.png' },
+        ]
+      ],
+      messageList: [
+        [
+          { title: 'jakads', showIcon: true, icon: '/Common/images/app.png', remark: '99+' },
+          { title: 'jhlee0133', showIcon: true, icon: '/Common/images/app.png', remark: '7' },
+          { title: 'wonder5193', showIcon: true, icon: '/Common/images/app.png', remark: '15' }
+        ]
+      ],
+      showSearchBox: false,
+      searchTextOfRecord: '',
+      record: {
+        menuball: { x: 600, y: 600 },
+        dateRule: '最近一个月',
+        sortRule: '日期从晚到早',
+        list: [
+          {
+            food: {
+              name: '食物1',
+              calorie: 12,
+              information: '食物1的信息',
+              ingredient: '食物1的原料，有A,B,CJLKKJFLKJDSLFJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJLSKFSDFSLFAAAAAAAAAAAAAAAJLKKFFFFFFFFF',
+              link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
+            },
+            time: '2019-11-25'
+          },
+          {
+            food: {
+              name: '食物1',
+              calorie: 12,
+              information: '食物1的信息',
+              ingredient: '食物1的原料',
+              link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
+            },
+            time: '2019-11-25'
+          },
+          {
+            food: {
+              name: '食物1',
+              calorie: 12,
+              information: '食物1的信息',
+              ingredient: '食物1的原料',
+              link: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574524623331&di=b563a6f8fb4a19b16f8fffa92c5bd781&imgtype=0&src=http%3A%2F%2Fcp1.douguo.net%2Fupload%2Fcaiku%2F6%2Fa%2F1%2Fyuan_6a3a1eef62d8c21a651db0892a59a3c1.jpg'
+            },
+            time: '2019-11-25'
+          },
+        ]
+      }
+    },
+    changeTabActive (e) {
+      this.tabIndex = e.index
+      this.$page.setTitleBar({ text: this.title[this.tabIndex] })
+    },
+    changeFriendsTabActive(e){
+      console.log(e.index)
+      this.tabIndex2 = e.index
+    },
+    onInit () {
+      this.$page.setTitleBar({ text: this.title[1] })
+    },
+    discernTakePhoto () {
+      let _this = this
+      media.takePhoto({
         success: function (data) {
-          if (data.index === 0)
-            _this.$app.exit()
+          _this.isShowPhoto = true
+          _this.choosedPhoto = data.uri
+          //TODO: 将照片发送到服务器上
+        },
+        fail: function (data, code) {
+
         }
       })
-    }
-
-    function logout() {
-      prompt.showDialog({
-        title: '警告',
-        message: '您确认要注销当前账号吗？',
-        buttons: [
-          { text: '确认', color: 'green' },
-          { text: '取消', color: 'darkgray' }
-        ],
+    },
+    discernLocalPhoto () {
+      let _this = this
+      media.pickImage({
         success: function (data) {
-          if (data.index === 0) {
-            router.replace({
-              uri: 'Login'
-            })
+          console.log(data.uri)
+          _this.isShowPhoto = true
+          _this.choosedPhoto = data.uri
+          //TODO: 将照片发送到服务器上
+        },
+        fail: function (data, code) {
+
+        }
+      })
+    },
+    discernWebPhoto () {
+      router.push({
+        uri: '/MainPage/ChoosePhotoUri'
+      })
+    },
+    showRecordCharts () {
+      webview.loadUrl({
+        url: '../Common/html/charts.html'
+      })
+    },
+    startDiscern () {
+      //TODO:将图片文件上传到服务器
+    },
+    rechoose () {
+      this.choosedPhoto = ''
+      this.isShowPhoto = false
+    },
+    clickSettingListItem (e) {
+      let _this = this
+      switch (e.detail.id) {
+        case 'account-setting':
+
+          router.push({
+            uri: '/MainPage/AccountSetting',
+            params: { username: _this.username, email: _this.email, phone: this.phone, avatar: this.avatar }
+          })
+          break
+        case 'notice':
+          //TODO:转到通知页面
+          break
+        case 'logout':
+          logout()
+          break
+        case 'exit':
+          exit()
+          break
+        default:
+          break
+      }
+
+      function exit () {
+        prompt.showDialog({
+          title: '警告',
+          message: '您确认要退出快应用吗？',
+          buttons: [
+            { text: '确认', color: 'green' },
+            { text: '取消', color: 'darkgray' }
+          ],
+          success: function (data) {
+            if (data.index === 0)
+              _this.$app.exit()
           }
+        })
+      }
+
+      function logout () {
+        prompt.showDialog({
+          title: '警告',
+          message: '您确认要注销当前账号吗？',
+          buttons: [
+            { text: '确认', color: 'green' },
+            { text: '取消', color: 'darkgray' }
+          ],
+          success: function (data) {
+            if (data.index === 0) {
+              router.replace({
+                uri: 'Login'
+              })
+            }
+          }
+        })
+      }
+    },
+    searchRecord () {
+      //TODO: 从数据库中搜索
+      console.log('搜索：' + this.searchTextOfRecord)
+    },
+    inputSearchText (e) {
+      this.searchTextOfRecord = e.detail.value
+    },
+    chooseRecordDate (e) {
+      let itemList = [
+        '最近一周',
+        '最近一个月',
+        '最近半年',
+        '最近一年',
+        '全部'
+      ]
+      let _this = this
+      prompt.showContextMenu({
+        itemList: itemList,
+        success: function (data) {
+          _this.record.dateRule = itemList[data.index]
+          //TODO: 重新请求服务器获取规定日期限的数据
         }
       })
+    },
+    sortRecord (e) {
+      let itemList = [
+        '日期从早到晚',
+        '日期从晚到早',
+        '食物名称',
+        'Calorie值从大到小',
+        'Calorie值从小到大'
+      ]
+      let _this = this
+      prompt.showContextMenu({
+        itemList: itemList,
+        success: function (data) {
+          _this.record.sortRule = itemList[data.index]
+          //TODO:重新请求服务器获取排序后的数据
+        }
+      })
+    },
+    showSearch () {
+      this.showSearchBox = !this.showSearchBox
+    },
+    showRecordCharts () {
+      webview.loadUrl({
+        url: 'http://www.92yan.online:8080/pages/picture-game/'
+      })
     }
-  },
-  searchRecord() {
-    //TODO: 从数据库中搜索
-    console.log('搜索：' + this.searchTextOfRecord)
-  },
-  inputSearchText(e) {
-    this.searchTextOfRecord = e.detail.value
-  },
-  chooseRecordDate(e) {
-    let itemList = [
-      '最近一周',
-      '最近一个月',
-      '最近半年',
-      '最近一年',
-      '全部'
-    ]
-    let _this = this
-    prompt.showContextMenu({
-      itemList: itemList,
-      success: function (data) {
-        _this.record.dateRule = itemList[data.index]
-        //TODO: 重新请求服务器获取规定日期限的数据
-      }
-    })
-  },
-  sortRecord(e) {
-    let itemList = [
-      '日期从早到晚',
-      '日期从晚到早',
-      '食物名称',
-      'Calorie值从大到小',
-      'Calorie值从小到大'
-    ]
-    let _this = this
-    prompt.showContextMenu({
-      itemList: itemList,
-      success: function (data) {
-        _this.record.sortRule = itemList[data.index]
-        //TODO:重新请求服务器获取排序后的数据
-      }
-    })
-  },
-  showSearch() {
-    this.showSearchBox = !this.showSearchBox
-  },
-  showRecordCharts() {
-    webview.loadUrl({
-      url: 'http://www.92yan.online:8080/pages/picture-game/'
-    })
   }
-}
 </script>
 
 <style>
-@import "../Common/css/main.css";
+    @import "../Common/css/main.css";
 
-#start-discern {
-  margin: 75px 0;
-}
+    #start-discern {
+        margin: 75px 0;
+    }
 
-.tab-bar {
-  position: fixed;
-  padding: 15px 0;
-  bottom: 0px;
-  margin: 0;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: #f5f5f5;
-}
+    .tab-bar {
+        position: fixed;
+        padding: 15px 0;
+        bottom: 0px;
+        margin: 0;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: #f5f5f5;
+    }
 
-.discern-buttons {
-  flex-direction: column;
-  /* margin-top: 75px; */
-}
+    .discern-buttons {
+        flex-direction: column;
+        /* margin-top: 75px; */
+    }
 
-.tab-content {
-  align-items: center;
-  padding-bottom: 111px;
-}
+    .tab-content {
+        align-items: center;
+        padding-bottom: 111px;
+    }
 
-.discern-button {
-  width: 550px;
-  height: 200px;
-  padding: 25px 75px;
-  margin: 50px 0;
-  justify-content: space-between;
-  border: 1px solid #a9a9a9;
-}
+    .discern-button {
+        width: 550px;
+        height: 200px;
+        padding: 25px 75px;
+        margin: 50px 0;
+        justify-content: space-between;
+        border: 1px solid #a9a9a9;
+    }
 
-.discern-icon {
-  width: 150px;
-  height: 150px;
-}
+    .discern-icon {
+        width: 150px;
+        height: 150px;
+    }
 
-#start-tab {
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 50px;
-}
+    #start-tab {
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 50px;
+    }
 
-.tab-container {
-  margin-bottom: 250px;
-}
+    .tab-container {
+        margin-bottom: 250px;
+    }
 
-.tabs {
-  margin: 25px;
-}
+    .tabs {
+        margin: 25px;
+    }
 
-.start-tab-title > text {
-  font-size: 54px;
-}
+    .start-tab-title > text {
+        font-size: 54px;
+    }
 
-.tab-active {
-  color: #ff0000;
-  font-size: 36px;
-  border-bottom: 5px solid #8faadc;
-}
+    .tab-active {
+        color: #ff0000;
+        font-size: 36px;
+        border-bottom: 5px solid #8faadc;
+    }
 
-.tab-common {
-  color: #2f4f4f;
-  font-size: 32px;
-}
+    .tab-common {
+        color: #2f4f4f;
+        font-size: 32px;
+    }
 
-.tab-bar-text {
-  padding: 15px;
-  text-align: center;
-  flex: 1;
-}
+    .tab-bar-text {
+        padding: 15px;
+        text-align: center;
+        flex: 1;
+    }
 
-.preview-photo {
-  width: 550px;
-}
+    .preview-photo {
+        width: 550px;
+    }
 
-.choosed-photo-text {
-  width: 550px;
-  text-align: center;
-  margin: 30px;
-}
+    .choosed-photo-text {
+        width: 550px;
+        text-align: center;
+        margin: 30px;
+    }
 
-.choosed-photo {
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin: 75px 0;
-}
+    .choosed-photo {
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: 75px 0;
+    }
 
-#setting {
-  flex-direction: column;
-  justify-content: flex-start;
-}
+    #setting {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
 
-#friends{
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
+    #friends {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .friends-list {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+  .message-list{
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  #friends .tab-container{
+    padding-top: 15px;
+    margin-top: 10px;
+    border-top: 2px solid darkgrey;
+  }
+
+  #friends tab-bar{
+    padding-bottom: 15px ;
+  }
 </style>

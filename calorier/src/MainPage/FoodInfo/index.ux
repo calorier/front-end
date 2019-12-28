@@ -1,6 +1,8 @@
 <!-- 食物详细信息页面 -->
 <import name="info" src="./info.ux"></import>
 <import name="hr" src="../../Components/hr"></import>
+<import name="btn"  src="../../Components/btn"></import>
+ 
   
 <template>
     <div class="page">
@@ -23,6 +25,8 @@
             <hr width="very-thin">
             </hr>
         </div>
+        <!-- 分享 -->
+        <btn btn-type="warning" title="分享给好友"></btn>
     </div>
 </template>
 <style>
