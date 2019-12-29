@@ -220,9 +220,7 @@
       })
     },
     showRecordCharts () {
-      webview.loadUrl({
-        url: '../Common/html/charts.html'
-      })
+      //TODO: 链接到图标网页
     },
     startDiscern () {
       //TODO:将图片文件上传到服务器

@@ -72,6 +72,9 @@
       },
       "MainPage/FoodInfo": {
         "component": "index"
+      },
+      "ChatPage": {
+        "component": "index"
       }
     },
     "widgets": {}
@@ -111,6 +114,9 @@
       },
       "MainPage/FoodInfo": {
         "titleBarText": "详细信息"
+      },
+      "ChatPage": {
+        "titleBarText": "聊天页面"
       }
     }
   }

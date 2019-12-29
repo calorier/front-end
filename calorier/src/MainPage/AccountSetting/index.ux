@@ -50,7 +50,7 @@ export default {
         username: 'xxxx',
         email: 'xxx@xxx.xxx',
         phone: 'xxx-xxxx-xxxx',
-        avatarSrc: '../../Common/logo.png'
+        avatarSrc: '../../Common/images/app.png'
     },
     private: {
         lineList: [
