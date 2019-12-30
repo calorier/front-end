@@ -1,0 +1,105 @@
+<template>
+    <div class="container {{type}}">
+        <div class="icon" if="{{type === 'them'}}">
+            <image class="image" src="{{icon}}"></image>
+        </div>
+        <div class="content">
+            <text class="text {{color}}">{{content}}</text>
+        </div>
+        <div class="icon" if="{{type === 'me'}}">
+            <image class="image" src="{{icon}}"></image>
+        </div>
+    </div>
+</template>
+
+<script>
+  export default {
+    props: {
+      content: String,
+      icon: String,
+      type: String,
+      color: String
+    }
+  }
+</script>
+
+<style>
+    .container{
+        flex-direction: row;
+        width: 700px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        align-items: flex-start;
+    }
+
+    .icon{
+        width: 75px;
+        height: 75px;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        margin-left: 25px;
+        margin-right: 25px;
+        flex: 0;
+    }
+
+    .image {
+        width: 75px;
+        height: 75px;
+        border-radius: 10px;
+    }
+
+    .content{
+        width: 475px;
+    }
+
+    .text{
+        padding: 25px;
+        border-radius: 15px;
+        background-color: whitesmoke;
+    }
+
+    .text-left{
+        justify-content: flex-start;
+    }
+
+    .text-right{
+        justify-content: right;
+    }
+
+    .white{
+        background-color: white;
+    }
+
+    .yellow{
+        background-color: yellow;
+    }
+
+    .orange{
+        background-color: orange;
+    }
+
+    .skyblue{
+        background-color: skyblue;
+    }
+
+    .me{
+        justify-content: flex-end;
+        margin-left: 125px;
+    }
+
+    .them{
+        justify-content: flex-start;
+        margin-right: 125px;
+    }
+
+    .me > .content{
+        justify-content: flex-end;
+    }
+
+    .them > .content {
+        justify-content: flex-start;
+    }
+
+</style>

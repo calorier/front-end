@@ -1,13 +1,166 @@
+<import name="msg" src="./msg.ux"></import>
+
 <template>
-    <text>hello world</text>
+    <div class="page">
+        <div class="message">
+            <refresh>
+                <list class="message-list">
+                    <list-item for="{{(id, item) in messageList}}" type="{{'msg' + id }}">
+                        <msg type="{{item.type}}" icon="{{item.icon}}" color="{{item.type==='me'? 'skyblue':'orange'}}"
+                             content="{{item.content}}"></msg>
+                    </list-item>
+                </list>
+            </refresh>
+        </div>
+        <div class="bottom">
+            <div class="input-area">
+                <input id="input-box" type="text"/>
+                <input id="send-btn" type="button" value="发送"/>
+            </div>
+            <div class="more" onclick="showMore">
+                <text>{{ moreFlag ? '折叠' :'更多'}}</text>
+            </div>
+            <div class="more-content">
+
+            </div>
+        </div>
+    </div>
 </template>
 <style>
     @import '../Common/css/main.css';
+
     text {
         font-size: 40px;
         text-align: center;
     }
+
+    .message {
+        padding: 10px 25px 10px 25px;
+    }
+
+    .bottom {
+        width: 750px;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: 160px;
+        padding-left: 25px;
+        padding-right: 25px;
+        bottom: 0;
+        padding-top: 30px;
+        background-color: #8FAADC;
+    }
+
+    .more {
+        width: 700px;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+    }
+
+    .more text {
+        font-size: 24px;
+    }
+
+    .more-content {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .input-area {
+        width: 700px;
+        height: 75px;
+    }
+
+    .input-area > #input-box {
+        border: 2px solid darkgrey;
+        border-radius: 5px;
+        margin-right: 25px;
+        font-size: 24px;
+        flex: 1;
+        background-color: white;
+    }
+
+    .input-area > #send-btn {
+        width: 100px;
+        border-radius: 5px;
+        color: #8FAADC;
+        background-color: whitesmoke;
+        font-size: 24px;
+    }
+
+    .message-list {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
 </style>
 <script>
+  export default {
+    private: {
+      moreFlag: false,
+      messageList: [
+        {
+          type: 'me',
+          icon: 'http://g.hiphotos.baidu.com/zhidao/pic/item/c83d70cf3bc79f3d6e7bf85db8a1cd11738b29c0.jpg',
+          content: '你好'
+        },
+        {
+          type: 'me',
+          icon: 'http://g.hiphotos.baidu.com/zhidao/pic/item/c83d70cf3bc79f3d6e7bf85db8a1cd11738b29c0.jpg',
+          content: '你在做什么'
+        },
+        {
+          type: 'them',
+          icon: 'http://attach.bbs.miui.com/forum/201503/06/162347xwvgpdfpw5p7rvvv.jpg',
+          content: 'hello '
+        },
+        {
+          type: 'them',
+          icon: 'http://attach.bbs.miui.com/forum/201503/06/162347xwvgpdfpw5p7rvvv.jpg',
+          content: 'what about you?'
+        },
+        {
+          type: 'me',
+          icon: 'http://g.hiphotos.baidu.com/zhidao/pic/item/c83d70cf3bc79f3d6e7bf85db8a1cd11738b29c0.jpg',
+          content: '我刚吃完饭'
+        },
+        {
+          type: 'them',
+          icon: 'http://attach.bbs.miui.com/forum/201503/06/162347xwvgpdfpw5p7rvvv.jpg',
+          content: '你吃的什么'
+        },
+        {
+          type: 'me',
+          icon: 'http://g.hiphotos.baidu.com/zhidao/pic/item/c83d70cf3bc79f3d6e7bf85db8a1cd11738b29c0.jpg',
+          content: '我吃的饭'
+        },
+        {
+          type: 'them',
+          icon:'http://attach.bbs.miui.com/forum/201503/06/162347xwvgpdfpw5p7rvvv.jpg',
+          content: '当你经过七重的孤独，才能成为真正的强者！我们的世界，也由此而生。'
+        },
+        {
+          type: 'them',
+          icon:'http://attach.bbs.miui.com/forum/201503/06/162347xwvgpdfpw5p7rvvv.jpg',
+          content: '当你经过七重的孤独，才能成为真正的强者！我们的世界，也由此而生。'
+        },
+        {
+          type: 'me',
+          icon:'http://attach.bbs.miui.com/forum/201503/06/162347xwvgpdfpw5p7rvvv.jpg',
+          content: '当你经过七重的孤独，才能成为真正的强者！我们的世界，也由此而生。'
+        },
+        {
+          type: 'them',
+          icon: 'http://g.hiphotos.baidu.com/zhidao/pic/item/c83d70cf3bc79f3d6e7bf85db8a1cd11738b29c0.jpg',
+          content: '当你经过七重的孤独，才能成为真正的强者！我们的世界，也由此而生。'
+        }
+      ]
+    },
+    showMore () {
 
+    }
+  }
 </script>

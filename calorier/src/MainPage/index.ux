@@ -2,82 +2,85 @@
 <import name="line-box" src="../Components/line_box"></import>
 <import name="btn" src="../Components/btn"></import>
 <import name="record-list" src="./record_list"></import>
-<import name="search" src="../Components/search_box"></import>
-<import name="friendspage" src="./friendspage.ux"></import>
+<import name="search-box" src="../Components/search_box"></import>
 
 <template>
-  <div class="page">
-    <tabs class="tabs" index="1" onchange="changeTabActive">
-      <!-- 底部导航区 -->
-      <tab-bar class="tab-bar" mode="fixed">
-        <text class="tab-bar-text {{tabIndex === 0 ? 'tab-active' : 'tab-common' }}">记录</text>
-        <text class="tab-bar-text {{tabIndex === 1 ? 'tab-active' : 'tab-common' }}">开始</text>
-        <text class="tab-bar-text {{tabIndex === 2 ? 'tab-active' : 'tab-common' }}">好友</text>
-        <text class="tab-bar-text {{tabIndex === 3 ? 'tab-active' : 'tab-common' }}">设置</text>
-      </tab-bar>
-      <tab-content class="tab-content" scrollable="{{scrollable}}">
-        <!-- 记录界面 -->
-        <div class="tab-container">
-          <record-list ready-to-search="{{showSearchBox}}" onshow-search="showSearch" record="{{record.list}}" date-rule="{{record.dateRule}}" sort-rule="{{record.sortRule}}" onchoose-date="chooseRecordDate" onsort="sortRecord" onshow-charts="showCharts">
-          </record-list>
-        </div>
-        <!-- 开始界面 -->
-        <div id="start-tab" class="tab-container">
-          <!-- 识别方式按钮组 -->
-          <div class="discern-buttons" if="!isShowPhoto">
-            <!-- 拍摄识别 -->
-            <div class="discern-button" onclick="discernTakePhoto">
-              <image class="discern-icon" src="{{actBtns[0].icon}}"></image>
-              <text class="discern-text">{{actBtns[0].name}}</text>
-            </div>
-            <!-- 本地识别 -->
-            <div class="discern-button" onclick="discernLocalPhoto">
-              <image class="discern-icon" src="{{actBtns[1].icon}}"></image>
-              <text class="discern-text">{{actBtns[1].name}}</text>
-            </div>
-            <!-- 数据统计 -->
-            <div class="discern-button" onclick="showRecordCharts">
-              <image class="discern-icon" src="{{actBtns[2].icon}}"></image>
-              <text class="discern-text">{{actBtns[2].name}}</text>
-            </div>
-          </div>
-          <!-- 选择图片后显示此界面 -->
-          <div class="choosed-photo" if="isShowPhoto">
-            <!-- 已选择的图片预览 -->
-            <image class="preview-photo" src="{{choosedPhoto}}"></image>
-            <!-- 选择图片后的操作 -->
-            <btn btn-type="primary" title="开始识别" onclick-btn="startDiscern"></btn>
-            <btn btn-type="warning" title="重新选择" onclick-btn="rechoose"></btn>
-          </div>
-        </div>
-        <!-- 好友界面 -->
-        <div id="friends" class="tab-container">
-<!--          <friendspage friends-list="{{friendsList}}" message-list="{{messageList}}"></friendspage>-->
-          <tabs class="friend-tabs" index="0" onchange="changeFriendsTabActive">
-            <tab-bar class="friend-tab-bar" mode="fixed">
-              <text class="tab-bar-text {{tabIndex2 === 0 ? 'tab-active' : 'tab-common' }}">消息</text>
-              <text class="tab-bar-text {{tabIndex2 === 1 ? 'tab-active' : 'tab-common' }}">好友</text>
+    <div class="page">
+        <tabs class="tabs" index="1" onchange="changeTabActive">
+            <!-- 底部导航区 -->
+            <tab-bar class="tab-bar" mode="fixed">
+                <text class="tab-bar-text {{tabIndex === 0 ? 'tab-active' : 'tab-common' }}">记录</text>
+                <text class="tab-bar-text {{tabIndex === 1 ? 'tab-active' : 'tab-common' }}">开始</text>
+                <text class="tab-bar-text {{tabIndex === 2 ? 'tab-active' : 'tab-common' }}">好友</text>
+                <text class="tab-bar-text {{tabIndex === 3 ? 'tab-active' : 'tab-common' }}">设置</text>
             </tab-bar>
-            <tab-content class="tab-content">
-              <div class="tab-container message-list">
-                <search-box place-holder="搜索"></search-box>
-                <line-box for="{{messageList}}" list="{{$item}}" onclick-item="clickMessageListItem"></line-box>
-              </div>
-              <div class="tab-container friends-list">
-                <search-box place-holder="搜索好友"></search-box>
-                <line-box for="{{(id,item) in friendsList}}" list="{{item}}" onclick-item="clickFriendsListItem"></line-box>
-              </div>
+            <tab-content class="tab-content" scrollable="{{scrollable}}">
+                <!-- 记录界面 -->
+                <div class="tab-container">
+                    <record-list ready-to-search="{{showSearchBox}}" onshow-search="showSearch" record="{{record.list}}"
+                                 date-rule="{{record.dateRule}}" sort-rule="{{record.sortRule}}"
+                                 onchoose-date="chooseRecordDate" onsort="sortRecord" onshow-charts="showCharts">
+                    </record-list>
+                </div>
+                <!-- 开始界面 -->
+                <div id="start-tab" class="tab-container">
+                    <!-- 识别方式按钮组 -->
+                    <div class="discern-buttons" if="!isShowPhoto">
+                        <!-- 拍摄识别 -->
+                        <div class="discern-button" onclick="discernTakePhoto">
+                            <image class="discern-icon" src="{{actBtns[0].icon}}"></image>
+                            <text class="discern-text">{{actBtns[0].name}}</text>
+                        </div>
+                        <!-- 本地识别 -->
+                        <div class="discern-button" onclick="discernLocalPhoto">
+                            <image class="discern-icon" src="{{actBtns[1].icon}}"></image>
+                            <text class="discern-text">{{actBtns[1].name}}</text>
+                        </div>
+                        <!-- 数据统计 -->
+                        <div class="discern-button" onclick="showRecordCharts">
+                            <image class="discern-icon" src="{{actBtns[2].icon}}"></image>
+                            <text class="discern-text">{{actBtns[2].name}}</text>
+                        </div>
+                    </div>
+                    <!-- 选择图片后显示此界面 -->
+                    <div class="choosed-photo" if="isShowPhoto">
+                        <!-- 已选择的图片预览 -->
+                        <image class="preview-photo" src="{{choosedPhoto}}"></image>
+                        <!-- 选择图片后的操作 -->
+                        <btn btn-type="primary" title="开始识别" onclick-btn="startDiscern"></btn>
+                        <btn btn-type="warning" title="重新选择" onclick-btn="rechoose"></btn>
+                    </div>
+                </div>
+                <!-- 好友界面 -->
+                <div id="friends" class="tab-container">
+                    <!--          <friendspage friends-list="{{friendsList}}" message-list="{{messageList}}"></friendspage>-->
+                    <tabs class="friend-tabs" index="0" onchange="changeFriendsTabActive">
+                        <tab-bar class="friend-tab-bar" mode="fixed">
+                            <text class="tab-bar-text {{tabIndex2 === 0 ? 'tab-active' : 'tab-common' }}">消息</text>
+                            <text class="tab-bar-text {{tabIndex2 === 1 ? 'tab-active' : 'tab-common' }}">好友</text>
+                        </tab-bar>
+                        <tab-content class="tab-content">
+                            <div class="tab-container message-list">
+                                <search-box place-holder="搜索"></search-box>
+                                <line-box for="{{messageList}}" list="{{$item}}"
+                                          onclick-item="clickMessageListItem"></line-box>
+                            </div>
+                            <div class="tab-container friends-list">
+                                <search-box place-holder="搜索好友"></search-box>
+                                <line-box for="{{(id,item) in friendsList}}" list="{{item}}"
+                                          onclick-item="clickFriendsListItem"></line-box>
+                            </div>
+                        </tab-content>
+                    </tabs>
+                </div>
+                <!-- 设置界面 -->
+                <div id="setting" class="tab-container">
+                    <!-- 设置界面的线条按钮列表 -->
+                    <line-box for="{{lineList}}" list="{{$item}}" onclick-item="clickSettingListItem"></line-box>
+                </div>
             </tab-content>
-          </tabs>
-        </div>
-        <!-- 设置界面 -->
-        <div id="setting" class="tab-container">
-          <!-- 设置界面的线条按钮列表 -->
-          <line-box for="{{lineList}}" list="{{$item}}" onclick-item="clickSettingListItem"></line-box>
-        </div>
-      </tab-content>
-    </tabs>
-  </div>
+        </tabs>
+    </div>
 </template>
 
 <script>
@@ -119,21 +122,21 @@
       ],
       friendsList: [
         [
-          { title: 'jakads', showIcon: true, icon: '/Common/images/app.png' },
-          { title: 'jhlee0133', showIcon: true, icon: '/Common/images/app.png' },
-          { title: 'wonder5193', showIcon: true, icon: '/Common/images/app.png' },
-          { title: 'SillyFangirl', showIcon: true, icon: '/Common/images/app.png' },
-          { title: 'Attang', showIcon: true, icon: '/Common/images/app.png' },
-          { title: 'WindyS', showIcon: true, icon: '/Common/images/app.png' },
-          { title: 'Abcdullah', showIcon: true, icon: '/Common/images/app.png' },
-          { title: 'Sern888', showIcon: true, icon: '/Common/images/app.png' },
+          { id: 1, title: 'jakads', showIcon: true, icon: '/Common/images/app.png' },
+          { id: 2, title: 'jhlee0133', showIcon: true, icon: '/Common/images/app.png' },
+          { id: 3, title: 'wonder5193', showIcon: true, icon: '/Common/images/app.png' },
+          { id: 4, title: 'SillyFangirl', showIcon: true, icon: '/Common/images/app.png' },
+          { id: 5, title: 'Attang', showIcon: true, icon: '/Common/images/app.png' },
+          { id: 6, title: 'WindyS', showIcon: true, icon: '/Common/images/app.png' },
+          { id: 7, title: 'Abcdullah', showIcon: true, icon: '/Common/images/app.png' },
+          { id: 8, title: 'Sern888', showIcon: true, icon: '/Common/images/app.png' },
         ]
       ],
       messageList: [
         [
-          { title: 'jakads', showIcon: true, icon: '/Common/images/app.png', remark: '99+' },
-          { title: 'jhlee0133', showIcon: true, icon: '/Common/images/app.png', remark: '7' },
-          { title: 'wonder5193', showIcon: true, icon: '/Common/images/app.png', remark: '15' }
+          { id: 1, title: 'jakads', showIcon: true, icon: '/Common/images/app.png', remark: '99+' },
+          { id: 2, title: 'jhlee0133', showIcon: true, icon: '/Common/images/app.png', remark: '7' },
+          { id: 3, title: 'wonder5193', showIcon: true, icon: '/Common/images/app.png', remark: '15' }
         ]
       ],
       showSearchBox: false,
@@ -180,7 +183,7 @@
       this.tabIndex = e.index
       this.$page.setTitleBar({ text: this.title[this.tabIndex] })
     },
-    changeFriendsTabActive(e){
+    changeFriendsTabActive (e) {
       console.log(e.index)
       this.tabIndex2 = e.index
     },
@@ -219,9 +222,6 @@
         uri: '/MainPage/ChoosePhotoUri'
       })
     },
-    showRecordCharts () {
-      //TODO: 链接到图标网页
-    },
     startDiscern () {
       //TODO:将图片文件上传到服务器
     },
@@ -241,6 +241,9 @@
           break
         case 'notice':
           //TODO:转到通知页面
+          router.push({
+            uri: '/ChatPage'
+          })
           break
         case 'logout':
           logout()
@@ -331,7 +334,17 @@
     },
     showRecordCharts () {
       webview.loadUrl({
-        url: 'http://www.92yan.online:8080/pages/picture-game/'
+        url: 'http://192.168.43.239:8080/#/user/123/month/123'
+      })
+    },
+    clickMessageListItem (e) {
+        router.push({
+          uri:'/ChatPage'
+        })
+    },
+    clickFriendsListItem(e){
+      router.push({
+        uri: '/ChatPage'
       })
     }
   }
@@ -448,19 +461,19 @@
         align-items: center;
     }
 
-  .message-list{
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-  }
+    .message-list {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
 
-  #friends .tab-container{
-    padding-top: 15px;
-    margin-top: 10px;
-    border-top: 2px solid darkgrey;
-  }
+    #friends .tab-container {
+        padding-top: 15px;
+        margin-top: 10px;
+        border-top: 2px solid darkgrey;
+    }
 
-  #friends tab-bar{
-    padding-bottom: 15px ;
-  }
+    #friends tab-bar {
+        padding-bottom: 15px;
+    }
 </style>

@@ -3,7 +3,7 @@
   "name": "Calorier",
   "versionName": "1.0.0",
   "versionCode": "1",
-  "minPlatformVersion": "1030",
+  "minPlatformVersion": "1050",
   "icon": "/Common/images/app.png",
   "features": [
     {
@@ -116,7 +116,9 @@
         "titleBarText": "详细信息"
       },
       "ChatPage": {
-        "titleBarText": "聊天页面"
+        "titleBarText": "聊天页面",
+        "titleBarBackgroundColor": "#8FAADC",
+        "titleBarTextColor": "white"
       }
     }
   }
